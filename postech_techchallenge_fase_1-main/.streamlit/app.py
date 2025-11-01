@@ -2,12 +2,8 @@
 
 #libs
 import pandas as pd
-
-#libs gráficas
 import plotly.express as px
 from plotly.subplots import make_subplots
-
-#streamlit
 import streamlit as st
 
 #funções
