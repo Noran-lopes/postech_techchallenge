@@ -1,0 +1,931 @@
+ano,pais,quantidade_importacao,valor_importacao,valor_importacao_por_litro
+2007,Africa do Sul,386425,1320244,3.42
+2008,Africa do Sul,315380,1151699,3.65
+2009,Africa do Sul,493093,1931449,3.92
+2010,Africa do Sul,966276,3600658,3.73
+2011,Africa do Sul,507509,2136394,4.21
+2012,Africa do Sul,722327,3041449,4.21
+2013,Africa do Sul,475331,1985184,4.18
+2014,Africa do Sul,722715,3033932,4.2
+2015,Africa do Sul,743335,2996543,4.03
+2016,Africa do Sul,578829,1686226,2.91
+2017,Africa do Sul,1138732,3241298,2.85
+2018,Africa do Sul,1127053,3574371,3.17
+2019,Africa do Sul,1092042,3604038,3.3
+2020,Africa do Sul,627150,1701072,2.71
+2021,Africa do Sul,859169,2508140,2.92
+2007,Alemanha,234006,647626,2.77
+2008,Alemanha,293935,1063825,3.62
+2009,Alemanha,56075,291876,5.21
+2010,Alemanha,192661,784674,4.07
+2011,Alemanha,198025,933545,4.71
+2012,Alemanha,113243,591167,5.22
+2013,Alemanha,114866,414070,3.6
+2014,Alemanha,115804,483316,4.17
+2015,Alemanha,95171,358275,3.76
+2016,Alemanha,158386,606333,3.83
+2017,Alemanha,83289,315959,3.79
+2018,Alemanha,142971,516975,3.62
+2019,Alemanha,101055,412794,4.08
+2020,Alemanha,136992,504168,3.68
+2021,Alemanha,106541,546967,5.13
+2007,Argelia,0,0,0.0
+2008,Argelia,0,0,0.0
+2009,Argelia,0,0,0.0
+2010,Argelia,0,0,0.0
+2011,Argelia,0,0,0.0
+2012,Argelia,0,0,0.0
+2013,Argelia,0,0,0.0
+2014,Argelia,0,0,0.0
+2015,Argelia,0,0,0.0
+2016,Argelia,0,43,0.0
+2017,Argelia,0,0,0.0
+2018,Argelia,0,0,0.0
+2019,Argelia,0,0,0.0
+2020,Argelia,0,0,0.0
+2021,Argelia,0,0,0.0
+2007,Arabia Saudita,0,0,0.0
+2008,Arabia Saudita,0,0,0.0
+2009,Arabia Saudita,0,0,0.0
+2010,Arabia Saudita,0,0,0.0
+2011,Arabia Saudita,0,0,0.0
+2012,Arabia Saudita,0,0,0.0
+2013,Arabia Saudita,0,0,0.0
+2014,Arabia Saudita,0,0,0.0
+2015,Arabia Saudita,0,0,0.0
+2016,Arabia Saudita,0,43,0.0
+2017,Arabia Saudita,0,0,0.0
+2018,Arabia Saudita,563,3249,5.77
+2019,Arabia Saudita,0,0,0.0
+2020,Arabia Saudita,0,0,0.0
+2021,Arabia Saudita,2510,8761,3.49
+2007,Argentina,15621172,36160548,2.31
+2008,Argentina,14417761,37382581,2.59
+2009,Argentina,13902750,38521731,2.77
+2010,Argentina,16965266,52126581,3.07
+2011,Argentina,16673491,58806736,3.53
+2012,Argentina,14613839,55633562,3.81
+2013,Argentina,12732815,49524694,3.89
+2014,Argentina,13437321,53815956,4.0
+2015,Argentina,12465041,48043201,3.85
+2016,Argentina,14098009,45214862,3.21
+2017,Argentina,15461740,51770842,3.35
+2018,Argentina,15221318,52817642,3.47
+2019,Argentina,16548931,54527380,3.29
+2020,Argentina,22610267,66322932,2.93
+2021,Argentina,26869241,79527959,2.96
+2007,Australia,363611,1583361,4.35
+2008,Australia,215135,1248671,5.8
+2009,Australia,270908,998680,3.69
+2010,Australia,405271,1864846,4.6
+2011,Australia,824440,2811273,3.41
+2012,Australia,615334,2474783,4.02
+2013,Australia,553190,1703815,3.08
+2014,Australia,236742,1008851,4.26
+2015,Australia,395030,1261810,3.19
+2016,Australia,498515,1537834,3.08
+2017,Australia,354641,1246545,3.51
+2018,Australia,3518,21664,6.16
+2019,Australia,16292,1214643,74.55
+2020,Australia,212595,792051,3.73
+2021,Australia,366875,1383093,3.77
+2007,Austria,1688,35247,20.88
+2008,Austria,11388,73348,6.44
+2009,Austria,1895,12073,6.37
+2010,Austria,2329,30075,12.91
+2011,Austria,6357,56227,8.84
+2012,Austria,8098,85116,10.51
+2013,Austria,56849,227204,4.0
+2014,Austria,2770,32116,11.59
+2015,Austria,360,3891,10.81
+2016,Austria,1485,7551,5.08
+2017,Austria,2655,24629,9.28
+2018,Austria,513995,1567866,3.05
+2019,Austria,348289,128379,0.37
+2020,Austria,6540,52348,8.0
+2021,Austria,13427,141822,10.56
+2007,Bermudas,0,0,0.0
+2008,Bermudas,0,0,0.0
+2009,Bermudas,0,0,0.0
+2010,Bermudas,0,0,0.0
+2011,Bermudas,0,0,0.0
+2012,Bermudas,0,0,0.0
+2013,Bermudas,0,0,0.0
+2014,Bermudas,0,0,0.0
+2015,Bermudas,0,0,0.0
+2016,Bermudas,0,0,0.0
+2017,Bermudas,0,0,0.0
+2018,Bermudas,0,0,0.0
+2019,Bermudas,0,0,0.0
+2020,Bermudas,0,0,0.0
+2021,Bermudas,10,141,14.1
+2007,Belgica,0,0,0.0
+2008,Belgica,0,0,0.0
+2009,Belgica,0,0,0.0
+2010,Belgica,0,0,0.0
+2011,Belgica,0,0,0.0
+2012,Belgica,0,0,0.0
+2013,Belgica,0,0,0.0
+2014,Belgica,0,0,0.0
+2015,Belgica,0,0,0.0
+2016,Belgica,7,1090,155.71
+2017,Belgica,4376,45221,10.33
+2018,Belgica,163,1201,7.37
+2019,Belgica,7,30,4.29
+2020,Belgica,0,0,0.0
+2021,Belgica,0,0,0.0
+2007,Bolivia,540,1348,2.5
+2008,Bolivia,0,0,0.0
+2009,Bolivia,0,0,0.0
+2010,Bolivia,0,0,0.0
+2011,Bolivia,0,0,0.0
+2012,Bolivia,0,0,0.0
+2013,Bolivia,0,0,0.0
+2014,Bolivia,0,0,0.0
+2015,Bolivia,0,0,0.0
+2016,Bolivia,0,0,0.0
+2017,Bolivia,0,0,0.0
+2018,Bolivia,0,0,0.0
+2019,Bolivia,0,0,0.0
+2020,Bolivia,0,0,0.0
+2021,Bolivia,0,0,0.0
+2007,Bosnia-Herzegovina,0,0,0.0
+2008,Bosnia-Herzegovina,0,0,0.0
+2009,Bosnia-Herzegovina,0,0,0.0
+2010,Bosnia-Herzegovina,0,0,0.0
+2011,Bosnia-Herzegovina,0,0,0.0
+2012,Bosnia-Herzegovina,0,0,0.0
+2013,Bosnia-Herzegovina,0,0,0.0
+2014,Bosnia-Herzegovina,0,0,0.0
+2015,Bosnia-Herzegovina,0,0,0.0
+2016,Bosnia-Herzegovina,0,0,0.0
+2017,Bosnia-Herzegovina,0,0,0.0
+2018,Bosnia-Herzegovina,0,0,0.0
+2019,Bosnia-Herzegovina,0,0,0.0
+2020,Bosnia-Herzegovina,1218,902,0.74
+2021,Bosnia-Herzegovina,0,0,0.0
+2007,Brasil,3513,19633,5.59
+2008,Brasil,309,1769,5.72
+2009,Brasil,0,0,0.0
+2010,Brasil,7,232,33.14
+2011,Brasil,93,1164,12.52
+2012,Brasil,1051,15016,14.29
+2013,Brasil,473,5747,12.15
+2014,Brasil,449,6011,13.39
+2015,Brasil,1359,12919,9.51
+2016,Brasil,183,2127,11.62
+2017,Brasil,845617,260135,0.31
+2018,Brasil,18040,121806,6.75
+2019,Brasil,29295,246008,8.4
+2020,Brasil,4347,41213,9.48
+2021,Brasil,12602,39816,3.16
+2007,Bulgaria,0,0,0.0
+2008,Bulgaria,0,0,0.0
+2009,Bulgaria,0,0,0.0
+2010,Bulgaria,20997,94727,4.51
+2011,Bulgaria,1097,2527,2.3
+2012,Bulgaria,0,0,0.0
+2013,Bulgaria,5947,21988,3.7
+2014,Bulgaria,15019,46857,3.12
+2015,Bulgaria,17244,51678,3.0
+2016,Bulgaria,17777,55253,3.11
+2017,Bulgaria,35284,68234,1.93
+2018,Bulgaria,16166,17550,1.09
+2019,Bulgaria,10944,9915,0.91
+2020,Bulgaria,23110,58319,2.52
+2021,Bulgaria,34185,105623,3.09
+2007,Canada,0,0,0.0
+2008,Canada,396,30957,78.17
+2009,Canada,0,0,0.0
+2010,Canada,0,0,0.0
+2011,Canada,2322,35032,15.09
+2012,Canada,0,0,0.0
+2013,Canada,0,0,0.0
+2014,Canada,1530,25958,16.97
+2015,Canada,0,0,0.0
+2016,Canada,0,0,0.0
+2017,Canada,0,0,0.0
+2018,Canada,301,17418,57.87
+2019,Canada,0,0,0.0
+2020,Canada,0,0,0.0
+2021,Canada,0,0,0.0
+2007,Chile,18845522,47680946,2.53
+2008,Chile,18662626,50748373,2.72
+2009,Chile,22476643,61380795,2.73
+2010,Chile,26434744,72983389,2.76
+2011,Chile,26642889,84952500,3.19
+2012,Chile,30258795,93315735,3.08
+2013,Chile,28288212,90281256,3.19
+2014,Chile,35479279,113375484,3.2
+2015,Chile,36686870,107684380,2.94
+2016,Chile,43400991,123183079,2.84
+2017,Chile,51787643,145628860,2.81
+2018,Chile,51104825,144731210,2.83
+2019,Chile,52697108,145471294,2.76
+2020,Chile,72726186,176540499,2.43
+2021,Chile,69617587,182568098,2.62
+2007,China,459,4235,9.23
+2008,China,6858,32738,4.77
+2009,China,0,0,0.0
+2010,China,0,0,0.0
+2011,China,0,0,0.0
+2012,China,0,0,0.0
+2013,China,0,0,0.0
+2014,China,0,0,0.0
+2015,China,0,0,0.0
+2016,China,108,213,1.97
+2017,China,1000,613,0.61
+2018,China,5,472,94.4
+2019,China,317,2458,7.75
+2020,China,0,0,0.0
+2021,China,0,0,0.0
+2007,Coreia do Sul,0,0,0.0
+2008,Coreia do Sul,0,0,0.0
+2009,Coreia do Sul,0,0,0.0
+2010,Coreia do Sul,0,0,0.0
+2011,Coreia do Sul,0,0,0.0
+2012,Coreia do Sul,0,0,0.0
+2013,Coreia do Sul,0,0,0.0
+2014,Coreia do Sul,0,0,0.0
+2015,Coreia do Sul,0,0,0.0
+2016,Coreia do Sul,0,0,0.0
+2017,Coreia do Sul,0,0,0.0
+2018,Coreia do Sul,0,0,0.0
+2019,Coreia do Sul,0,0,0.0
+2020,Coreia do Sul,0,0,0.0
+2021,Coreia do Sul,0,0,0.0
+2007,Croacia,0,0,0.0
+2008,Croacia,0,0,0.0
+2009,Croacia,0,0,0.0
+2010,Croacia,0,0,0.0
+2011,Croacia,450,12388,27.53
+2012,Croacia,630,16571,26.3
+2013,Croacia,0,0,0.0
+2014,Croacia,0,0,0.0
+2015,Croacia,2069,3779,1.83
+2016,Croacia,0,0,0.0
+2017,Croacia,0,0,0.0
+2018,Croacia,0,0,0.0
+2019,Croacia,450,2900,6.44
+2020,Croacia,0,0,0.0
+2021,Croacia,17343,78954,4.55
+2007,Emirados Arabes Unidos,0,0,0.0
+2008,Emirados Arabes Unidos,0,0,0.0
+2009,Emirados Arabes Unidos,0,0,0.0
+2010,Emirados Arabes Unidos,0,0,0.0
+2011,Emirados Arabes Unidos,0,0,0.0
+2012,Emirados Arabes Unidos,0,0,0.0
+2013,Emirados Arabes Unidos,0,0,0.0
+2014,Emirados Arabes Unidos,35,1138,32.51
+2015,Emirados Arabes Unidos,529,10093,19.08
+2016,Emirados Arabes Unidos,2175,35489,16.32
+2017,Emirados Arabes Unidos,0,0,0.0
+2018,Emirados Arabes Unidos,0,0,0.0
+2019,Emirados Arabes Unidos,0,0,0.0
+2020,Emirados Arabes Unidos,0,0,0.0
+2021,Emirados Arabes Unidos,0,0,0.0
+2007,Eslovenia,0,0,0.0
+2008,Eslovenia,0,0,0.0
+2009,Eslovenia,0,0,0.0
+2010,Eslovenia,0,0,0.0
+2011,Eslovenia,3600,62602,17.39
+2012,Eslovenia,433,1223,2.82
+2013,Eslovenia,2192,25307,11.55
+2014,Eslovenia,4190,23377,5.58
+2015,Eslovenia,4640,24190,5.21
+2016,Eslovenia,14366,46972,3.27
+2017,Eslovenia,0,0,0.0
+2018,Eslovenia,20976,68521,3.27
+2019,Eslovenia,30968,101190,3.27
+2020,Eslovenia,11392,39771,3.49
+2021,Eslovenia,42944,172141,4.01
+2007,Eslovaquia,0,0,0.0
+2008,Eslovaquia,0,0,0.0
+2009,Eslovaquia,0,0,0.0
+2010,Eslovaquia,0,0,0.0
+2011,Eslovaquia,0,0,0.0
+2012,Eslovaquia,0,0,0.0
+2013,Eslovaquia,0,0,0.0
+2014,Eslovaquia,0,0,0.0
+2015,Eslovaquia,0,0,0.0
+2016,Eslovaquia,1305,3878,2.97
+2017,Eslovaquia,21424,64828,3.03
+2018,Eslovaquia,10800,17938,1.66
+2019,Eslovaquia,459,3160,6.88
+2020,Eslovaquia,0,0,0.0
+2021,Eslovaquia,0,0,0.0
+2007,Espanha,862045,4506858,5.23
+2008,Espanha,990697,6036397,6.09
+2009,Espanha,1119540,6224187,5.56
+2010,Espanha,1622100,8698824,5.36
+2011,Espanha,1999970,11175636,5.59
+2012,Espanha,2540209,11724946,4.62
+2013,Espanha,2772104,13570874,4.9
+2014,Espanha,2760797,12797753,4.64
+2015,Espanha,3024533,11396855,3.77
+2016,Espanha,3948614,12221512,3.1
+2017,Espanha,7240535,19834451,2.74
+2018,Espanha,5595268,19353631,3.46
+2019,Espanha,5797980,17111436,2.95
+2020,Espanha,7169384,19802061,2.76
+2021,Espanha,8793911,23795616,2.71
+2007,Estados Unidos,79376,334204,4.21
+2008,Estados Unidos,65956,542331,8.22
+2009,Estados Unidos,85393,702825,8.23
+2010,Estados Unidos,194774,1344921,6.91
+2011,Estados Unidos,369806,1756901,4.75
+2012,Estados Unidos,379329,1995929,5.26
+2013,Estados Unidos,518888,2817086,5.43
+2014,Estados Unidos,788773,4171731,5.29
+2015,Estados Unidos,775131,3848755,4.97
+2016,Estados Unidos,725420,2924715,4.03
+2017,Estados Unidos,1372347,4110641,3.0
+2018,Estados Unidos,548655,2584781,4.71
+2019,Estados Unidos,534870,2400830,4.49
+2020,Estados Unidos,366584,2119234,5.78
+2021,Estados Unidos,506405,2809649,5.55
+2007,Franca,2737947,14721769,5.38
+2008,Franca,2466277,16275708,6.6
+2009,Franca,2372448,16893114,7.12
+2010,Franca,2799118,18778566,6.71
+2011,Franca,3329437,22917012,6.88
+2012,Franca,3181440,21636175,6.8
+2013,Franca,3265362,23336291,7.15
+2014,Franca,3592782,27480375,7.65
+2015,Franca,3617130,19353291,5.35
+2016,Franca,3831566,15940341,4.16
+2017,Franca,5921728,25280255,4.27
+2018,Franca,4653789,22688105,4.88
+2019,Franca,5324383,24299524,4.56
+2020,Franca,5658139,24894394,4.4
+2021,Franca,6241310,31428188,5.04
+2007,Georgia,0,0,0.0
+2008,Georgia,0,0,0.0
+2009,Georgia,0,0,0.0
+2010,Georgia,0,0,0.0
+2011,Georgia,0,0,0.0
+2012,Georgia,0,0,0.0
+2013,Georgia,33750,134202,3.98
+2014,Georgia,0,0,0.0
+2015,Georgia,0,0,0.0
+2016,Georgia,0,0,0.0
+2017,Georgia,0,0,0.0
+2018,Georgia,8164,20416,2.5
+2019,Georgia,21748,41161,1.89
+2020,Georgia,20274,42948,2.12
+2021,Georgia,19188,32901,1.71
+2007,Ilhas Georgia do Sul e Sandwich do Sul,0,0,0.0
+2008,Ilhas Georgia do Sul e Sandwich do Sul,0,0,0.0
+2009,Ilhas Georgia do Sul e Sandwich do Sul,0,0,0.0
+2010,Ilhas Georgia do Sul e Sandwich do Sul,0,0,0.0
+2011,Ilhas Georgia do Sul e Sandwich do Sul,0,0,0.0
+2012,Ilhas Georgia do Sul e Sandwich do Sul,0,0,0.0
+2013,Ilhas Georgia do Sul e Sandwich do Sul,0,0,0.0
+2014,Ilhas Georgia do Sul e Sandwich do Sul,0,0,0.0
+2015,Ilhas Georgia do Sul e Sandwich do Sul,0,0,0.0
+2016,Ilhas Georgia do Sul e Sandwich do Sul,0,0,0.0
+2017,Ilhas Georgia do Sul e Sandwich do Sul,0,0,0.0
+2018,Ilhas Georgia do Sul e Sandwich do Sul,0,0,0.0
+2019,Ilhas Georgia do Sul e Sandwich do Sul,0,0,0.0
+2020,Ilhas Georgia do Sul e Sandwich do Sul,0,0,0.0
+2021,Ilhas Georgia do Sul e Sandwich do Sul,1838,2915,1.59
+2007,Grecia,18110,137867,7.61
+2008,Grecia,11034,78819,7.14
+2009,Grecia,52474,190076,3.62
+2010,Grecia,42449,196361,4.63
+2011,Grecia,82207,414329,5.04
+2012,Grecia,68966,323206,4.69
+2013,Grecia,13241,71175,5.38
+2014,Grecia,24244,107195,4.42
+2015,Grecia,55680,190185,3.42
+2016,Grecia,6568,18637,2.84
+2017,Grecia,40775,139486,3.42
+2018,Grecia,41601,135185,3.25
+2019,Grecia,21251,70881,3.34
+2020,Grecia,61181,219292,3.58
+2021,Grecia,13619,55228,4.06
+2007,Hong Kong,0,0,0.0
+2008,Hong Kong,0,0,0.0
+2009,Hong Kong,0,0,0.0
+2010,Hong Kong,0,0,0.0
+2011,Hong Kong,0,0,0.0
+2012,Hong Kong,0,0,0.0
+2013,Hong Kong,0,0,0.0
+2014,Hong Kong,0,0,0.0
+2015,Hong Kong,0,0,0.0
+2016,Hong Kong,0,0,0.0
+2017,Hong Kong,0,0,0.0
+2018,Hong Kong,0,0,0.0
+2019,Hong Kong,0,0,0.0
+2020,Hong Kong,311,2776,8.93
+2021,Hong Kong,0,0,0.0
+2007,Hungria,14600,82552,5.65
+2008,Hungria,15981,90021,5.63
+2009,Hungria,12632,87626,6.94
+2010,Hungria,15193,160961,10.59
+2011,Hungria,15073,256240,17.0
+2012,Hungria,10404,168862,16.23
+2013,Hungria,10911,140198,12.85
+2014,Hungria,18733,114610,6.12
+2015,Hungria,5117,74688,14.6
+2016,Hungria,8315,58756,7.07
+2017,Hungria,23813,168353,7.07
+2018,Hungria,23742,113405,4.78
+2019,Hungria,34591,146500,4.24
+2020,Hungria,5254,25250,4.81
+2021,Hungria,20174,160816,7.97
+2007,Indonesia,0,0,0.0
+2008,Indonesia,0,0,0.0
+2009,Indonesia,0,0,0.0
+2010,Indonesia,0,0,0.0
+2011,Indonesia,0,0,0.0
+2012,Indonesia,0,0,0.0
+2013,Indonesia,0,0,0.0
+2014,Indonesia,0,0,0.0
+2015,Indonesia,0,0,0.0
+2016,Indonesia,0,43,0.0
+2017,Indonesia,0,0,0.0
+2018,Indonesia,36,210,5.83
+2019,Indonesia,258,1464,5.67
+2020,Indonesia,0,0,0.0
+2021,Indonesia,0,0,0.0
+2007,Irlanda,0,0,0.0
+2008,Irlanda,0,0,0.0
+2009,Irlanda,0,0,0.0
+2010,Irlanda,0,0,0.0
+2011,Irlanda,0,0,0.0
+2012,Irlanda,0,0,0.0
+2013,Irlanda,0,0,0.0
+2014,Irlanda,0,0,0.0
+2015,Irlanda,0,0,0.0
+2016,Irlanda,0,43,0.0
+2017,Irlanda,0,0,0.0
+2018,Irlanda,107,954,8.92
+2019,Irlanda,179,1705,9.53
+2020,Irlanda,0,0,0.0
+2021,Irlanda,0,0,0.0
+2007,Israel,13250,27398,2.07
+2008,Israel,8694,41161,4.73
+2009,Israel,8924,36534,4.09
+2010,Israel,15782,93252,5.91
+2011,Israel,16382,68676,4.19
+2012,Israel,8439,47579,5.64
+2013,Israel,24622,97645,3.97
+2014,Israel,7734,40372,5.22
+2015,Israel,19028,55248,2.9
+2016,Israel,12548,44277,3.53
+2017,Israel,37302,120463,3.23
+2018,Israel,40354,182017,4.51
+2019,Israel,52237,182602,3.5
+2020,Israel,38239,224349,5.87
+2021,Israel,60281,298732,4.96
+2007,Italia,9177932,22023175,2.4
+2008,Italia,9723292,24378627,2.51
+2009,Italia,8387908,23079424,2.75
+2010,Italia,11911190,28683242,2.41
+2011,Italia,12025827,35481781,2.95
+2012,Italia,10506144,30750897,2.93
+2013,Italia,8308831,30799292,3.71
+2014,Italia,8566756,31697736,3.7
+2015,Italia,8261383,25846195,3.13
+2016,Italia,7936409,22216811,2.8
+2017,Italia,11538990,33707111,2.92
+2018,Italia,10154564,34857594,3.43
+2019,Italia,10323254,33355982,3.23
+2020,Italia,9659999,32477890,3.36
+2021,Italia,11231625,39852162,3.55
+2007,Japao,0,0,0.0
+2008,Japao,0,0,0.0
+2009,Japao,0,0,0.0
+2010,Japao,0,0,0.0
+2011,Japao,0,0,0.0
+2012,Japao,0,0,0.0
+2013,Japao,0,0,0.0
+2014,Japao,0,0,0.0
+2015,Japao,0,0,0.0
+2016,Japao,0,0,0.0
+2017,Japao,0,0,0.0
+2018,Japao,0,0,0.0
+2019,Japao,153,1429,9.34
+2020,Japao,0,0,0.0
+2021,Japao,0,0,0.0
+2007,Iugoslavia,0,0,0.0
+2008,Iugoslavia,0,0,0.0
+2009,Iugoslavia,0,0,0.0
+2010,Iugoslavia,0,0,0.0
+2011,Iugoslavia,0,0,0.0
+2012,Iugoslavia,0,0,0.0
+2013,Iugoslavia,0,0,0.0
+2014,Iugoslavia,0,0,0.0
+2015,Iugoslavia,0,0,0.0
+2016,Iugoslavia,0,0,0.0
+2017,Iugoslavia,0,0,0.0
+2018,Iugoslavia,0,0,0.0
+2019,Iugoslavia,0,0,0.0
+2020,Iugoslavia,0,0,0.0
+2021,Iugoslavia,0,0,0.0
+2007,Libano,6768,25265,3.73
+2008,Libano,10270,47054,4.58
+2009,Libano,5310,34971,6.59
+2010,Libano,15741,123283,7.83
+2011,Libano,17685,137954,7.8
+2012,Libano,5805,47826,8.24
+2013,Libano,6588,75810,11.51
+2014,Libano,47610,270145,5.67
+2015,Libano,6480,56196,8.67
+2016,Libano,10665,71374,6.69
+2017,Libano,12737,93480,7.34
+2018,Libano,19742,150044,7.6
+2019,Libano,21836,167358,7.66
+2020,Libano,12384,45908,3.71
+2021,Libano,24194,78872,3.26
+2007,Luxemburgo,0,0,0.0
+2008,Luxemburgo,0,0,0.0
+2009,Luxemburgo,0,0,0.0
+2010,Luxemburgo,0,0,0.0
+2011,Luxemburgo,0,0,0.0
+2012,Luxemburgo,0,0,0.0
+2013,Luxemburgo,0,0,0.0
+2014,Luxemburgo,0,0,0.0
+2015,Luxemburgo,0,0,0.0
+2016,Luxemburgo,0,43,0.0
+2017,Luxemburgo,0,0,0.0
+2018,Luxemburgo,5,42,8.4
+2019,Luxemburgo,0,0,0.0
+2020,Luxemburgo,0,0,0.0
+2021,Luxemburgo,0,0,0.0
+2007,Macedonia,0,0,0.0
+2008,Macedonia,0,0,0.0
+2009,Macedonia,0,0,0.0
+2010,Macedonia,0,0,0.0
+2011,Macedonia,0,0,0.0
+2012,Macedonia,0,0,0.0
+2013,Macedonia,0,0,0.0
+2014,Macedonia,252,497,1.97
+2015,Macedonia,0,0,0.0
+2016,Macedonia,0,0,0.0
+2017,Macedonia,0,0,0.0
+2018,Macedonia,0,0,0.0
+2019,Macedonia,1323,874,0.66
+2020,Macedonia,0,0,0.0
+2021,Macedonia,0,0,0.0
+2007,Marrocos,0,0,0.0
+2008,Marrocos,0,0,0.0
+2009,Marrocos,0,0,0.0
+2010,Marrocos,0,0,0.0
+2011,Marrocos,0,0,0.0
+2012,Marrocos,450,3851,8.56
+2013,Marrocos,0,0,0.0
+2014,Marrocos,0,0,0.0
+2015,Marrocos,1755,15082,8.59
+2016,Marrocos,0,0,0.0
+2017,Marrocos,0,0,0.0
+2018,Marrocos,0,0,0.0
+2019,Marrocos,2250,16816,7.47
+2020,Marrocos,2160,8326,3.85
+2021,Marrocos,986,6958,7.06
+2007,Mexico,0,0,0.0
+2008,Mexico,0,0,0.0
+2009,Mexico,0,0,0.0
+2010,Mexico,7004,63663,9.09
+2011,Mexico,0,0,0.0
+2012,Mexico,0,0,0.0
+2013,Mexico,0,0,0.0
+2014,Mexico,0,0,0.0
+2015,Mexico,0,0,0.0
+2016,Mexico,0,0,0.0
+2017,Mexico,0,0,0.0
+2018,Mexico,134,804,6.0
+2019,Mexico,646,3927,6.08
+2020,Mexico,33,181,5.48
+2021,Mexico,4,19,4.75
+2007,Moldavia,0,0,0.0
+2008,Moldavia,0,0,0.0
+2009,Moldavia,0,0,0.0
+2010,Moldavia,0,0,0.0
+2011,Moldavia,0,0,0.0
+2012,Moldavia,0,0,0.0
+2013,Moldavia,0,0,0.0
+2014,Moldavia,0,0,0.0
+2015,Moldavia,0,0,0.0
+2016,Moldavia,0,0,0.0
+2017,Moldavia,0,0,0.0
+2018,Moldavia,0,0,0.0
+2019,Moldavia,0,0,0.0
+2020,Moldavia,5832,8965,1.54
+2021,Moldavia,25998,66480,2.56
+2007,Montenegro,0,0,0.0
+2008,Montenegro,0,0,0.0
+2009,Montenegro,0,0,0.0
+2010,Montenegro,0,0,0.0
+2011,Montenegro,0,0,0.0
+2012,Montenegro,0,0,0.0
+2013,Montenegro,0,0,0.0
+2014,Montenegro,0,0,0.0
+2015,Montenegro,0,0,0.0
+2016,Montenegro,0,0,0.0
+2017,Montenegro,0,0,0.0
+2018,Montenegro,0,0,0.0
+2019,Montenegro,1701,5440,3.2
+2020,Montenegro,0,0,0.0
+2021,Montenegro,0,0,0.0
+2007,Noruega,0,0,0.0
+2008,Noruega,0,0,0.0
+2009,Noruega,0,0,0.0
+2010,Noruega,0,0,0.0
+2011,Noruega,0,0,0.0
+2012,Noruega,0,0,0.0
+2013,Noruega,0,0,0.0
+2014,Noruega,0,0,0.0
+2015,Noruega,0,0,0.0
+2016,Noruega,396,253,0.64
+2017,Noruega,5,27,5.4
+2018,Noruega,0,0,0.0
+2019,Noruega,0,0,0.0
+2020,Noruega,0,0,0.0
+2021,Noruega,0,0,0.0
+2007,Nova Zelandia,47220,417276,8.84
+2008,Nova Zelandia,58408,536625,9.19
+2009,Nova Zelandia,30806,302244,9.81
+2010,Nova Zelandia,102683,947043,9.22
+2011,Nova Zelandia,151194,1267863,8.39
+2012,Nova Zelandia,81611,790355,9.68
+2013,Nova Zelandia,90728,840521,9.26
+2014,Nova Zelandia,106251,843533,7.94
+2015,Nova Zelandia,117340,950751,8.1
+2016,Nova Zelandia,50177,361030,7.2
+2017,Nova Zelandia,31379,248412,7.92
+2018,Nova Zelandia,130854,686193,5.24
+2019,Nova Zelandia,133179,776830,5.83
+2020,Nova Zelandia,15372,89763,5.84
+2021,Nova Zelandia,21995,137547,6.25
+2007,Holanda,0,0,0.0
+2008,Holanda,0,0,0.0
+2009,Holanda,0,0,0.0
+2010,Holanda,0,0,0.0
+2011,Holanda,0,0,0.0
+2012,Holanda,0,0,0.0
+2013,Holanda,0,0,0.0
+2014,Holanda,0,0,0.0
+2015,Holanda,0,0,0.0
+2016,Holanda,0,43,0.0
+2017,Holanda,0,0,0.0
+2018,Holanda,283,8719,30.81
+2019,Holanda,634,5297,8.35
+2020,Holanda,2285,22990,10.06
+2021,Holanda,0,0,0.0
+2007,Panama,0,0,0.0
+2008,Panama,0,0,0.0
+2009,Panama,0,0,0.0
+2010,Panama,0,0,0.0
+2011,Panama,0,0,0.0
+2012,Panama,0,0,0.0
+2013,Panama,0,0,0.0
+2014,Panama,0,0,0.0
+2015,Panama,0,0,0.0
+2016,Panama,0,0,0.0
+2017,Panama,0,0,0.0
+2018,Panama,0,0,0.0
+2019,Panama,17,96,5.65
+2020,Panama,0,0,0.0
+2021,Panama,0,0,0.0
+2007,Peru,0,0,0.0
+2008,Peru,0,0,0.0
+2009,Peru,0,0,0.0
+2010,Peru,33,252,7.64
+2011,Peru,0,0,0.0
+2012,Peru,0,0,0.0
+2013,Peru,0,0,0.0
+2014,Peru,3201,7906,2.47
+2015,Peru,0,0,0.0
+2016,Peru,0,0,0.0
+2017,Peru,0,0,0.0
+2018,Peru,77,653,8.48
+2019,Peru,0,0,0.0
+2020,Peru,0,0,0.0
+2021,Peru,0,0,0.0
+2007,Porto Rico,15658,14781,0.94
+2008,Porto Rico,0,0,0.0
+2009,Porto Rico,0,0,0.0
+2010,Porto Rico,0,0,0.0
+2011,Porto Rico,0,0,0.0
+2012,Porto Rico,0,0,0.0
+2013,Porto Rico,0,0,0.0
+2014,Porto Rico,0,0,0.0
+2015,Porto Rico,0,0,0.0
+2016,Porto Rico,0,0,0.0
+2017,Porto Rico,0,0,0.0
+2018,Porto Rico,47,404,8.6
+2019,Porto Rico,21,115,5.48
+2020,Porto Rico,54,1090,20.19
+2021,Porto Rico,0,0,0.0
+2007,Portugal,6805601,23945522,3.52
+2008,Portugal,6213781,23826443,3.83
+2009,Portugal,5884719,23688318,4.03
+2010,Portugal,7801759,29299792,3.76
+2011,Portugal,8556375,35247223,4.12
+2012,Portugal,9714940,36190898,3.73
+2013,Portugal,9299080,35729522,3.84
+2014,Portugal,9735153,37071142,3.81
+2015,Portugal,9952290,32547365,3.27
+2016,Portugal,10821232,29495190,2.73
+2017,Portugal,17345709,45032247,2.6
+2018,Portugal,17698831,53237413,3.01
+2019,Portugal,18228699,51444189,2.82
+2020,Portugal,23627260,66353572,2.81
+2021,Portugal,25925363,75668823,2.92
+2007,Reino Unido,7056,67728,9.6
+2008,Reino Unido,315,10257,32.56
+2009,Reino Unido,10236,53375,5.21
+2010,Reino Unido,621,22292,35.9
+2011,Reino Unido,270,6021,22.3
+2012,Reino Unido,406,26466,65.19
+2013,Reino Unido,127,2789,21.96
+2014,Reino Unido,315,9410,29.87
+2015,Reino Unido,90,1352,15.02
+2016,Reino Unido,5,255,51.0
+2017,Reino Unido,16,1033,64.56
+2018,Reino Unido,4126,51034,12.37
+2019,Reino Unido,4819,46623,9.67
+2020,Reino Unido,2586,22935,8.87
+2021,Reino Unido,1164,9357,8.04
+2007,Republica Dominicana,0,0,0.0
+2008,Republica Dominicana,0,0,0.0
+2009,Republica Dominicana,0,0,0.0
+2010,Republica Dominicana,0,0,0.0
+2011,Republica Dominicana,0,0,0.0
+2012,Republica Dominicana,0,0,0.0
+2013,Republica Dominicana,0,0,0.0
+2014,Republica Dominicana,0,0,0.0
+2015,Republica Dominicana,0,0,0.0
+2016,Republica Dominicana,0,43,0.0
+2017,Republica Dominicana,0,0,0.0
+2018,Republica Dominicana,2,13,6.5
+2019,Republica Dominicana,0,0,0.0
+2020,Republica Dominicana,0,0,0.0
+2021,Republica Dominicana,0,0,0.0
+2007,Romenia,0,0,0.0
+2008,Romenia,0,0,0.0
+2009,Romenia,0,0,0.0
+2010,Romenia,0,0,0.0
+2011,Romenia,0,0,0.0
+2012,Romenia,33750,85321,2.53
+2013,Romenia,0,0,0.0
+2014,Romenia,4163,5629,1.35
+2015,Romenia,5950,7925,1.33
+2016,Romenia,0,0,0.0
+2017,Romenia,18509,52150,2.82
+2018,Romenia,13719,9695,0.71
+2019,Romenia,5196,6706,1.29
+2020,Romenia,30635,70269,2.29
+2021,Romenia,33770,99562,2.95
+2007,Russia,0,0,0.0
+2008,Russia,0,0,0.0
+2009,Russia,0,0,0.0
+2010,Russia,0,0,0.0
+2011,Russia,0,0,0.0
+2012,Russia,0,0,0.0
+2013,Russia,0,0,0.0
+2014,Russia,0,0,0.0
+2015,Russia,0,0,0.0
+2016,Russia,0,43,0.0
+2017,Russia,0,0,0.0
+2018,Russia,17483,66160,3.78
+2019,Russia,0,0,0.0
+2020,Russia,0,0,0.0
+2021,Russia,32179,64905,2.02
+2007,San Marino,0,0,0.0
+2008,San Marino,0,0,0.0
+2009,San Marino,0,0,0.0
+2010,San Marino,0,0,0.0
+2011,San Marino,0,0,0.0
+2012,San Marino,0,0,0.0
+2013,San Marino,0,0,0.0
+2014,San Marino,0,0,0.0
+2015,San Marino,0,0,0.0
+2016,San Marino,0,0,0.0
+2017,San Marino,0,0,0.0
+2018,San Marino,0,0,0.0
+2019,San Marino,0,0,0.0
+2020,San Marino,0,0,0.0
+2021,San Marino,1095,2237,2.04
+2007,Servia,0,0,0.0
+2008,Servia,0,0,0.0
+2009,Servia,0,0,0.0
+2010,Servia,0,0,0.0
+2011,Servia,0,0,0.0
+2012,Servia,0,0,0.0
+2013,Servia,0,0,0.0
+2014,Servia,0,0,0.0
+2015,Servia,0,0,0.0
+2016,Servia,0,0,0.0
+2017,Servia,0,0,0.0
+2018,Servia,0,0,0.0
+2019,Servia,0,0,0.0
+2020,Servia,0,0,0.0
+2021,Servia,3471,8302,2.39
+2007,Siria,0,0,0.0
+2008,Siria,0,0,0.0
+2009,Siria,0,0,0.0
+2010,Siria,0,0,0.0
+2011,Siria,0,0,0.0
+2012,Siria,0,0,0.0
+2013,Siria,0,0,0.0
+2014,Siria,0,0,0.0
+2015,Siria,0,0,0.0
+2016,Siria,0,0,0.0
+2017,Siria,398,269,0.68
+2018,Siria,0,0,0.0
+2019,Siria,641,409,0.64
+2020,Siria,0,0,0.0
+2021,Siria,484,1280,2.64
+2007,Suica,0,0,0.0
+2008,Suica,1194,5359,4.49
+2009,Suica,4860,13129,2.7
+2010,Suica,2483,8010,3.23
+2011,Suica,0,0,0.0
+2012,Suica,0,0,0.0
+2013,Suica,0,0,0.0
+2014,Suica,0,0,0.0
+2015,Suica,1125,6284,5.59
+2016,Suica,6,245,40.83
+2017,Suica,138,2873,20.82
+2018,Suica,559,7647,13.68
+2019,Suica,4510,63619,14.11
+2020,Suica,735,5848,7.96
+2021,Suica,7,157,22.43
+2007,Republica Tcheca,0,0,0.0
+2008,Republica Tcheca,0,0,0.0
+2009,Republica Tcheca,0,0,0.0
+2010,Republica Tcheca,0,0,0.0
+2011,Republica Tcheca,0,0,0.0
+2012,Republica Tcheca,0,0,0.0
+2013,Republica Tcheca,0,0,0.0
+2014,Republica Tcheca,0,0,0.0
+2015,Republica Tcheca,0,0,0.0
+2016,Republica Tcheca,0,0,0.0
+2017,Republica Tcheca,0,0,0.0
+2018,Republica Tcheca,0,0,0.0
+2019,Republica Tcheca,0,0,0.0
+2020,Republica Tcheca,0,0,0.0
+2021,Republica Tcheca,225,5528,24.57
+2007,Tunisia,0,0,0.0
+2008,Tunisia,0,0,0.0
+2009,Tunisia,0,0,0.0
+2010,Tunisia,0,0,0.0
+2011,Tunisia,16420,37492,2.28
+2012,Tunisia,19913,42918,2.16
+2013,Tunisia,8000,20892,2.61
+2014,Tunisia,0,0,0.0
+2015,Tunisia,0,0,0.0
+2016,Tunisia,0,0,0.0
+2017,Tunisia,0,0,0.0
+2018,Tunisia,0,0,0.0
+2019,Tunisia,0,0,0.0
+2020,Tunisia,0,0,0.0
+2021,Tunisia,0,0,0.0
+2007,Turquia,0,0,0.0
+2008,Turquia,0,0,0.0
+2009,Turquia,0,0,0.0
+2010,Turquia,0,0,0.0
+2011,Turquia,0,0,0.0
+2012,Turquia,0,0,0.0
+2013,Turquia,0,0,0.0
+2014,Turquia,0,0,0.0
+2015,Turquia,32247,109741,3.4
+2016,Turquia,0,0,0.0
+2017,Turquia,0,0,0.0
+2018,Turquia,1591,1245,0.78
+2019,Turquia,0,0,0.0
+2020,Turquia,17563,55039,3.13
+2021,Turquia,0,0,0.0
+2007,Ucrania,0,0,0.0
+2008,Ucrania,0,0,0.0
+2009,Ucrania,0,0,0.0
+2010,Ucrania,0,0,0.0
+2011,Ucrania,0,0,0.0
+2012,Ucrania,0,0,0.0
+2013,Ucrania,0,0,0.0
+2014,Ucrania,0,0,0.0
+2015,Ucrania,0,0,0.0
+2016,Ucrania,5319,9679,1.82
+2017,Ucrania,865,931,1.08
+2018,Ucrania,0,0,0.0
+2019,Ucrania,4646,3074,0.66
+2020,Ucrania,0,0,0.0
+2021,Ucrania,0,0,0.0
+2007,Uruguai,2387225,3131899,1.31
+2008,Uruguai,920389,2089539,2.27
+2009,Uruguai,750343,1953390,2.6
+2010,Uruguai,1219387,3175051,2.6
+2011,Uruguai,1264306,3481552,2.75
+2012,Uruguai,1323884,3735892,2.82
+2013,Uruguai,1372329,3740613,2.73
+2014,Uruguai,1237537,3782282,3.06
+2015,Uruguai,1399547,4069100,2.91
+2016,Uruguai,2215692,5099162,2.3
+2017,Uruguai,5009098,7751966,1.55
+2018,Uruguai,2836574,8467846,2.99
+2019,Uruguai,2778244,7938059,2.86
+2020,Uruguai,4079076,10146829,2.49
+2021,Uruguai,3788831,10063341,2.66
