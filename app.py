@@ -392,9 +392,16 @@ def main():
             col1.metric("Temp max média (°C)", clim.get("temp_max_avg") or "N/D")
             col2.metric("Precipitação total (mm)", clim.get("precip_total") or "N/D")
             # econ card
-            recent_gdp = econ_df.dropna().sort_values("year", ascending=False).head(1)
-            gdp_display = f"US$ {int(recent_gdp.iloc[0]['value']):,}" if not recent_gdp.empty else "N/D"
-            col3.metric("PIB per capita (último)", gdp_display)
+           # Tratamento seguro de DataFrame do World Bank
+            if not econ_df.empty and "year" in econ_df.columns and "value" in econ_df.columns:
+             recent_gdp = econ_df.dropna().sort_values("year", ascending=False).head(1)
+             gdp_display = f"US$ {int(recent_gdp.iloc[0]['value']):,}" if not recent_gdp.empty else "N/D"
+            else:
+             recent_gdp = pd.DataFrame()
+             gdp_display = "N/D"
+
+col3.metric("PIB per capita (último)", gdp_display)
+
             # reviews proxy
             wrev = get_wine_review_proxy(country)
             st.write(f"Avaliação média proxy: **{wrev['avg_score']}** (n={wrev['reviews_count']})")
