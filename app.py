@@ -585,58 +585,22 @@ def main():
                 st.markdown("**Nota acadêmica:** validação temporal e modelos robustos (Prophet, ARIMA) recomendados para decisões operacionais.")
 
     # ------------- Raw data -------------
-elif aba == "Dados Brutos":
-    st.markdown("### Dados brutos (filtrados)")
+    with tab_raw:
+        st.subheader("Dados brutos (filtrados)")
+        st.dataframe(df.reset_index(drop=True), use_container_width=True, key="raw_data_table")
+        st.download_button("Baixar CSV filtrado", df.to_csv(index=False).encode("utf-8"),
+                           "exportacoes_filtradas.csv", "text/csv", key="download_filtered_csv")
 
-    # --- Ajustes visuais e de formato ---
-    df_filtrado = df_filtrado.copy()
+    # ------------- Insights -------------
+    with tab_insights:
+        st.subheader("Insights Automáticos — Resumo Executivo")
+        insights = generate_insights(df, df_top, climate_map if 'climate_map' in locals() else {}, econ_map if 'econ_map' in locals() else {})
+        for idx, it in enumerate(insights, 1):
+            st.write(f"{idx}. {it}")
+        st.markdown("**Sugestão:** incorporar estes pontos em um slide executivo (3-5 bullets) para apresentação à gerência.")
 
-    # Corrige o tipo do ano (remove vírgulas e converte para inteiro)
-    if "ano" in df_filtrado.columns:
-        df_filtrado["ano"] = (
-            df_filtrado["ano"]
-            .astype(str)
-            .str.replace(",", "")
-            .str.extract(r"(\d+)")
-            .astype(int)
-        )
+    st.caption("V5 Final — Dashboard analítico e executivo. Limitações: forecasts exploratórios; validar antes de decisões operacionais.")
 
-    # Remove coluna de produção se existir
-    if "producao_brasileira" in df_filtrado.columns:
-        df_filtrado.drop(columns=["producao_brasileira"], inplace=True)
-
-    # Formata valores monetários
-    if "valor_exportacao" in df_filtrado.columns:
-        df_filtrado["valor_exportacao"] = df_filtrado["valor_exportacao"].apply(
-            lambda x: f"${x:,.2f}" if pd.notnull(x) else "-"
-        )
-
-    if "valor_exportacao_por_litro" in df_filtrado.columns:
-        df_filtrado["valor_exportacao_por_litro"] = df_filtrado[
-            "valor_exportacao_por_litro"
-        ].apply(lambda x: f"${x:,.2f}" if pd.notnull(x) else "-")
-
-    # Formata percentual
-    if "percentual_exportacao" in df_filtrado.columns:
-        df_filtrado["percentual_exportacao"] = df_filtrado[
-            "percentual_exportacao"
-        ].apply(lambda x: f"{x * 100:.2f}%" if pd.notnull(x) else "-")
-
-    # Exibe tabela formatada
-    st.dataframe(df_filtrado, use_container_width=True)
-
-    # Botão para baixar CSV filtrado
-    csv = df_filtrado.to_csv(index=False).encode("utf-8")
-    st.download_button(
-        label="Baixar CSV filtrado",
-        data=csv,
-        file_name="dados_filtrados.csv",
-        mime="text/csv",
-    )
-
-    st.markdown(
-        "V5 Final — Dashboard analítico e executivo. Limitações: forecasts exploratórios; validar antes de decisões operacionais."
-    )
 # ---------------------------
 # Execução
 # ---------------------------
