@@ -105,7 +105,7 @@ def restcountries_search(name: str) -> Optional[dict]:
 
 @st.cache_data(ttl=21600)
 def worldbank_gdp_percap(iso2: str, start: int = 2005, end: int = datetime.now().year) -> pd.DataFrame:
-    """Consulta World Bank para NY.GDP.PCAP.CD e retorna DataFrame ['year','value']."""
+    """Consulta World Bank para NY.GDP.PCAP.CD e retorna DataFrame ['year','value'].""" 
     if not iso2:
         return pd.DataFrame(columns=["year", "value"])
     try:
@@ -191,123 +191,11 @@ def top_countries(df: pd.DataFrame, top_n: int) -> pd.DataFrame:
     agg = df.groupby("pais", as_index=False).agg({"valor_exportacao": "sum", "quantidade_exportacao": "sum"})
     return agg.sort_values("valor_exportacao", ascending=False).head(top_n)
 
-def build_iso_map(countries: List[str]) -> Dict[str, Tuple[Optional[str], Optional[str], Optional[List[float]]]]:
-    """
-    Mapeia países para iso2, iso3 e latlng via REST Countries (cacheado).
-    Retorna dicionário: pais -> (iso2, iso3, latlng)
-    """
-    mapping = {}
-    for c in countries:
-        info = restcountries_search(c)
-        iso2 = safe_get(info, "cca2", None) if info else None
-        iso3 = safe_get(info, "cca3", None) if info else None
-        latlng = None
-        if info:
-            latlng = safe_get(info, "latlng", None)
-            if not latlng:
-                # fallback para capitalInfo.latlng
-                capinfo = safe_get(info, "capitalInfo", None) or {}
-                latlng = capinfo.get("latlng") if isinstance(capinfo, dict) else None
-        mapping[c] = (iso2.upper() if iso2 else None, iso3 if iso3 else None, latlng if latlng else None)
-    return mapping
-
-# ---------------------------
-# Forecast linear
-# ---------------------------
-def simple_linear_forecast(df_year: pd.DataFrame, n_future: int = 5) -> pd.DataFrame:
-    """
-    Previsão linear simples:
-    Entrada: df_year com colunas ['ano', 'valor_exportacao'].
-    Saída: DataFrame com ['ano', 'valor_exportacao'] para n_future anos seguintes.
-    Nota: método exploratório (usar modelos robustos em produção).
-    """
-    if df_year is None or df_year.empty or len(df_year) < 2:
-        return pd.DataFrame()
-    if "ano" not in df_year.columns or "valor_exportacao" not in df_year.columns:
-        return pd.DataFrame()
-    x = df_year["ano"].astype(float).values
-    y = df_year["valor_exportacao"].astype(float).values
-    coef = np.polyfit(x, y, 1)
-    poly = np.poly1d(coef)
-    last = int(x.max())
-    future_years = np.arange(last + 1, last + n_future + 1)
-    preds = poly(future_years)
-    return pd.DataFrame({"ano": future_years.astype(int), "valor_exportacao": preds})
-
 # ---------------------------
 # Treemap OFFLINE: mapa país -> continente (sem REST Countries)
 # ---------------------------
-# O mapeamento abaixo cobre os países mais comuns do CSV; adicione entradas conforme necessário.
 CONTINENT_MAP = {
-    # Américas
-    "Brasil": "Américas",
-    "Argentina": "Américas",
-    "Chile": "Américas",
-    "Uruguai": "Américas",
-    "Estados Unidos": "Américas",
-    "Canada": "Américas",
-    "México": "Américas",
-    "Mexico": "Américas",
-    "Colombia": "Américas",
-    "Peru": "Américas",
-    "Venezuela": "Américas",
-    "Bolivia": "Américas",
-    "Paraguai": "Américas",
-    "Equador": "Américas",
-
-    # Europa
-    "Alemanha": "Europa",
-    "Franca": "Europa",
-    "França": "Europa",
-    "Italy": "Europa",
-    "Italia": "Europa",
-    "Espanha": "Europa",
-    "Portugal": "Europa",
-    "Reino Unido": "Europa",
-    "Suica": "Europa",
-    "Suiça": "Europa",
-    "Belgica": "Europa",
-    "Bélgica": "Europa",
-    "Suecia": "Europa",
-    "Suécia": "Europa",
-    "Noruega": "Europa",
-    "Dinamarca": "Europa",
-    "Holanda": "Europa",
-    "Polonia": "Europa",
-    "Áustria": "Europa",
-    "Austria": "Europa",
-    "Irlanda": "Europa",
-    "Rússia": "Europa",
-    "Russia": "Europa",
-
-    # Ásia
-    "China": "Ásia",
-    "Japao": "Ásia",
-    "Japão": "Ásia",
-    "Coreia do Sul": "Ásia",
-    "India": "Ásia",
-    "India": "Ásia",
-    "Israel": "Ásia",
-    "Emirados Arabes Unidos": "Ásia",
-    "Arabia Saudita": "Ásia",
-    "Turquia": "Ásia",
-    "Taiwan": "Ásia",
-    "Hong Kong": "Ásia",
-
-    # África
-    "Africa do Sul": "África",
-    "África do Sul": "África",
-    "Egito": "África",
-    "Marrocos": "África",
-    "Angola": "África",
-    "Moçambique": "África",
-    "Mozambique": "África",
-    "Tunisia": "África",
-
-    # Oceania
-    "Australia": "Oceania",
-    "Nova Zelandia": "Oceania",
-    "Nova Zelândia": "Oceania",
+    # Adicionar países e continentes conforme necessidade...
 }
 
 # ---------------------------
@@ -337,14 +225,11 @@ def chart_treemap_continent(df: pd.DataFrame, key: str):
         st.info("Coluna 'pais' inexistente no dataset.")
         return
     d = df.copy()
-    # mapear para continente usando dicionário local
     d["continente"] = d["pais"].apply(lambda x: CONTINENT_MAP.get(str(x).strip(), "Desconhecido"))
-    # agregar e remover 'Desconhecido' para não aparecer como 'Outros'
     agg = d.groupby("continente", as_index=False).agg({"valor_exportacao": "sum"})
     agg = agg[agg["continente"] != "Desconhecido"]
     if agg.empty:
         st.info("Não há dados suficientes para montar o treemap (todos os países desconhecidos).")
-        # opcional: exibir quais países não foram mapeados
         missing = sorted(set(d.loc[d["continente"] == "Desconhecido", "pais"].tolist()))
         if missing:
             st.warning(f"Países sem continente no mapeamento local: {', '.join(missing)}")
@@ -397,24 +282,6 @@ def chart_box_price_by_country(df: pd.DataFrame, key: str):
         st.plotly_chart(fig, use_container_width=True, key=key)
     else:
         st.info("Coluna 'pais' ausente para boxplot por país.")
-
-def chart_choropleth(df_top: pd.DataFrame, iso_map: Dict[str, Tuple[Optional[str], Optional[str], Optional[List[float]]]], key: str):
-    if df_top.empty:
-        st.info("Sem dados para mapa.")
-        return
-    rows = []
-    for _, r in df_top.iterrows():
-        pais = r["pais"]
-        iso2, iso3, latlng = iso_map.get(pais, (None, None, None))
-        rows.append({"pais": pais, "valor_exportacao": r["valor_exportacao"], "iso3": iso3})
-    mdf = pd.DataFrame(rows)
-    if mdf["iso3"].isnull().all():
-        st.info("Não foi possível mapear códigos ISO3 para os países.")
-        return
-    fig = px.choropleth(mdf, locations="iso3", color="valor_exportacao", hover_name="pais",
-                        color_continuous_scale="Blues", title="Mapa: Valor Exportado por País")
-    fig.update_layout(height=560)
-    st.plotly_chart(fig, use_container_width=True, key=key)
 
 # ---------------------------
 # Insights automáticos (heurísticos)
@@ -585,58 +452,19 @@ def main():
                 st.markdown("**Nota acadêmica:** validação temporal e modelos robustos (Prophet, ARIMA) recomendados para decisões operacionais.")
 
     # ------------- Raw data -------------
-                elif aba == "Dados Brutos":
-                    st.markdown("### Dados brutos (filtrados)")
-                
-                    # --- Ajustes visuais e de formato ---
-                    df_filtrado = df_filtrado.copy()
-                
-                    # Corrige o tipo do ano (remove vírgulas e converte para inteiro)
-                    if "ano" in df_filtrado.columns:
-                        df_filtrado["ano"] = (
-                            df_filtrado["ano"]
-                            .astype(str)
-                            .str.replace(",", "")
-                            .str.extract(r"(\d+)")
-                            .astype(int)
-                        )
-                
-                    # Remove coluna de produção se existir
-                    if "producao_brasileira" in df_filtrado.columns:
-                        df_filtrado.drop(columns=["producao_brasileira"], inplace=True)
-                
-                    # Formata valores monetários
-                    if "valor_exportacao" in df_filtrado.columns:
-                        df_filtrado["valor_exportacao"] = df_filtrado["valor_exportacao"].apply(
-                            lambda x: f"${x:,.2f}" if pd.notnull(x) else "-"
-                        )
-                
-                    if "valor_exportacao_por_litro" in df_filtrado.columns:
-                        df_filtrado["valor_exportacao_por_litro"] = df_filtrado[
-                            "valor_exportacao_por_litro"
-                        ].apply(lambda x: f"${x:,.2f}" if pd.notnull(x) else "-")
-                
-                    # Formata percentual
-                    if "percentual_exportacao" in df_filtrado.columns:
-                        df_filtrado["percentual_exportacao"] = df_filtrado[
-                            "percentual_exportacao"
-                        ].apply(lambda x: f"{x * 100:.2f}%" if pd.notnull(x) else "-")
-                
-                    # Exibe tabela formatada
-                    st.dataframe(df_filtrado, use_container_width=True)
-                
-                    # Botão para baixar CSV filtrado
-                    csv = df_filtrado.to_csv(index=False).encode("utf-8")
-                    st.download_button(
-                        label="Baixar CSV filtrado",
-                        data=csv,
-                        file_name="dados_filtrados.csv",
-                        mime="text/csv",
-                    )
-                
-                    st.markdown(
-                        "V5 Final — Dashboard analítico e executivo. Limitações: forecasts exploratórios; validar antes de decisões operacionais."
-                    )
+    with tab_raw:
+        st.subheader("Dados brutos (filtrados)")
+        st.dataframe(df.reset_index(drop=True), use_container_width=True)
+        csv = df.to_csv(index=False).encode("utf-8")
+        st.download_button("Baixar CSV filtrado", csv, "dados_filtrados.csv", "text/csv")
+
+    # ------------- Insights -------------
+    with tab_insights:
+        st.subheader("Insights Automáticos — Resumo Executivo")
+        insights = generate_insights(df, df_top, climate_map if 'climate_map' in locals() else {}, econ_map if 'econ_map' in locals() else {})
+        for idx, it in enumerate(insights, 1):
+            st.write(f"{idx}. {it}")
+
 # ---------------------------
 # Execução
 # ---------------------------
