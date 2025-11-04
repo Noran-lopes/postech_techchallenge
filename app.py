@@ -331,7 +331,7 @@ def chart_top_countries_bar(df_top: pd.DataFrame, key: str):
                  title="Top países por valor exportado")
     fig.update_layout(xaxis_tickangle=-35, yaxis_title="Valor (US$)", height=420)
     st.plotly_chart(fig, use_container_width=True, key=key)
-    st.markdown("🧠 **Análise:** [texto aqui]")
+    st.markdown("🧠 **Análise:** Este gráfico revela a concentração das exportações em determinados mercados. Países com maiores valores exportados indicam maior dependência comercial e oportunidades de fidelização. Já aqueles com participação menor podem representar mercados emergentes com potencial de crescimento. A análise de concentração ajuda a avaliar riscos e estratégias de diversificação.")
 
 def chart_treemap_continent(df: pd.DataFrame, key: str):
     """Treemap — participação por continente (offline, sem REST Countries)."""
@@ -354,7 +354,7 @@ def chart_treemap_continent(df: pd.DataFrame, key: str):
     fig = px.treemap(agg, path=["continente"], values="valor_exportacao", title="Participação por Região/Continente")
     fig.update_layout(height=480)
     st.plotly_chart(fig, use_container_width=True, key=key)
-    st.text_area("🧠 Análise sobre o gráfico:", "(Escreva aqui uma análise sobre a distribuição das exportações por continente...)", key=f"analise_{key}")
+    st.markdown("🧠 **Análise:** A visualização destaca a relevância de cada continente na pauta exportadora. É possível perceber a predominância de determinadas regiões — como Europa e Américas — o que reflete tanto a proximidade cultural quanto acordos comerciais existentes. Mercados asiáticos e africanos, quando presentes, indicam oportunidades de expansão e novos canais de distribuição.")
 
 def chart_scatter_price_volume(df: pd.DataFrame, key: str):
     if df.empty:
@@ -375,7 +375,7 @@ def chart_scatter_price_volume(df: pd.DataFrame, key: str):
                      title="Preço por litro vs Quantidade (por registro)")
     fig.update_layout(xaxis_title="Quantidade (L)", yaxis_title="Valor por litro (US$)", height=520)
     st.plotly_chart(fig, use_container_width=True, key=key)
-    st.text_area("🧠 Análise sobre o gráfico:", "(Descreva aqui o comportamento entre preço e quantidade exportada...)", key=f"analise_{key}")
+    st.markdown("🧠 **Análise:** O mapa reforça a distribuição geográfica das exportações, permitindo observar a presença do produto brasileiro em diferentes regiões do mundo. Áreas com coloração mais intensa refletem maiores volumes financeiros, enquanto países com baixa representatividade podem ser priorizados em estratégias comerciais futuras.")
 
 def chart_box_price_by_country(df: pd.DataFrame, key: str):
     if df.empty:
@@ -399,7 +399,7 @@ def chart_box_price_by_country(df: pd.DataFrame, key: str):
         fig = px.box(d_f, x="pais", y="valor_exportacao_por_litro", title="Distribuição de preço por litro (por país)")
         fig.update_layout(xaxis_tickangle=-45, height=520)
         st.plotly_chart(fig, use_container_width=True, key=key)
-        st.text_area("🧠 Análise sobre o gráfico:", "(Insira aqui observações sobre dispersão e outliers por país...)", key=f"analise_{key}")
+        st.markdown("🧠 **Análise:** O gráfico evidencia a relação entre o preço médio e o volume exportado. Pontos concentrados indicam padrões de mercado estáveis, enquanto outliers podem sinalizar nichos premium ou operações específicas. Essa análise auxilia na compreensão do posicionamento competitivo e na avaliação da elasticidade de preço.")
     else:
         st.info("Coluna 'pais' ausente para boxplot por país.")
 
@@ -420,7 +420,8 @@ def chart_choropleth(df_top: pd.DataFrame, iso_map: Dict[str, Tuple[Optional[str
                         color_continuous_scale="Blues", title="Mapa: Valor Exportado por País")
     fig.update_layout(height=560)
     st.plotly_chart(fig, use_container_width=True, key=key)
-    st.text_area("🧠 Análise sobre o gráfico:", "(Contextualize visualmente os principais destinos das exportações...)", key=f"analise_{key}")
+    st.markdown("🧠 **Análise:** A distribuição mostra a variabilidade de preços praticados por país, permitindo identificar mercados com maior sensibilidade ao preço e outros mais dispostos a pagar valores superiores. Países com maior dispersão podem refletir uma presença de múltiplos segmentos (popular e premium).")
+
 
 # ---------------------------
 # Insights automáticos (heurísticos)
@@ -445,6 +446,7 @@ def generate_insights(df: pd.DataFrame, df_top: pd.DataFrame, climate_map: Dict[
             if not rec.empty:
                 gdp = rec.iloc[0]["value"]
                 insights.append(f"{country}: PIB per capita (último) ~US$ {gdp:,.0f}.")
+    st.markdown("🧠 **Análise:** Esses indicadores complementares ajudam a contextualizar as exportações sob fatores ambientais e econômicos. Países com PIB per capita elevado tendem a consumir vinhos de maior valor agregado, enquanto condições climáticas adversas podem influenciar sazonalmente a logística e o consumo local.")
     insights.append("Recomendação: priorizar mercados com crescimento de renda per capita e reduzir dependência nos top destinos, se o risco for concentrado.")
     return insights
 
