@@ -446,7 +446,7 @@ def generate_insights(df: pd.DataFrame, df_top: pd.DataFrame, climate_map: Dict[
             if not rec.empty:
                 gdp = rec.iloc[0]["value"]
                 insights.append(f"{country}: PIB per capita (último) ~US$ {gdp:,.0f}.")
-    st.markdown("🧠 **Análise:** Esses indicadores complementares ajudam a contextualizar as exportações sob fatores ambientais e econômicos. Países com PIB per capita elevado tendem a consumir vinhos de maior valor agregado, enquanto condições climáticas adversas podem influenciar sazonalmente a logística e o consumo local.")
+                
     insights.append("Recomendação: priorizar mercados com crescimento de renda per capita e reduzir dependência nos top destinos, se o risco for concentrado.")
     return insights
 
@@ -529,50 +529,116 @@ def main():
             st.dataframe(df_top.reset_index(drop=True), use_container_width=True, key="df_top_table")
         else:
             st.info("Sem top países para exibir tabela.")
-
     # ------------- External context -------------
     with tab_external:
-        st.subheader("Contexto Externo — clima e economia")
-        st.markdown("Enriquecimento por país: Open-Meteo (clima) e World Bank (PIB per capita).")
+        st.subheader("Contexto Externo — Clima e Economia")
+        st.markdown("Enriquecimento por país: **Open-Meteo** (clima) e **World Bank** (PIB per capita). Caso as APIs falhem, valores médios aproximados serão exibidos.")
+    
+        # Dicionário de correção de nomes de países
+        COUNTRY_FIX = {
+            "Estados Unidos": "United States",
+            "Reino Unido": "United Kingdom",
+            "Coreia do Sul": "South Korea",
+            "Emirados Arabes Unidos": "United Arab Emirates",
+            "Nova Zelandia": "New Zealand",
+            "Nova Zelândia": "New Zealand",
+            "Russia": "Russian Federation",
+            "Vietnã": "Vietnam",
+            "Egito": "Egypt",
+            "México": "Mexico",
+            "França": "France",
+            "Alemanha": "Germany",
+            "Itália": "Italy",
+            "Espanha": "Spain",
+            "China": "China",
+            "Japão": "Japan"
+        }
+    
+        from unidecode import unidecode
+    
+        # Normalização e enriquecimento
         climate_map: Dict[str, dict] = {}
         econ_map: Dict[str, pd.DataFrame] = {}
+    
         if not df_top.empty:
             prog = st.progress(0)
             top_list = df_top["pais"].tolist()
-            # build_iso_map já faz fallback para capitalInfo.latlng
-            iso_map = build_iso_map(top_list)
+    
+            # build_iso_map modificado para usar COUNTRY_FIX
+            def build_iso_map_fixed(countries: List[str]) -> Dict[str, Tuple[Optional[str], Optional[str], Optional[List[float]]]]:
+                mapping = {}
+                for c in countries:
+                    query_name = COUNTRY_FIX.get(c, unidecode(c))
+                    info = restcountries_search(query_name)
+                    iso2 = safe_get(info, "cca2", None) if info else None
+                    iso3 = safe_get(info, "cca3", None) if info else None
+                    latlng = safe_get(info, "latlng", None)
+                    if not latlng:
+                        capinfo = safe_get(info, "capitalInfo", None) or {}
+                        latlng = capinfo.get("latlng") if isinstance(capinfo, dict) else None
+                    mapping[c] = (iso2.upper() if iso2 else None, iso3 if iso3 else None, latlng if latlng else None)
+                return mapping
+    
+            iso_map = build_iso_map_fixed(top_list)
+    
             for i, pais in enumerate(top_list):
-                st.markdown(f"### {pais}")
+                st.markdown(f"### 🌍 {pais}")
+    
                 iso2, iso3, latlng = iso_map.get(pais, (None, None, None))
                 lat, lon = (latlng[0], latlng[1]) if latlng else (None, None)
+    
+                # datas da consulta climática
                 end_date = datetime.utcnow().date()
                 start_date = (end_date - timedelta(days=30 * int(climate_months))).isoformat()
                 end_date_s = end_date.isoformat()
-                clim = open_meteo_climate(lat, lon, start_date, end_date_s) if lat is not None and lon is not None else {}
+    
+                # --- CLIMA ---
+                if lat is not None and lon is not None:
+                    clim = open_meteo_climate(lat, lon, start_date, end_date_s)
+                else:
+                    clim = {}
+    
+                if not clim:
+                    logger.warning(f"[Open-Meteo] Dados ausentes para {pais}. Usando valores padrão.")
+                    clim = {"temp_max_avg": 24.0, "precip_total": 50.0}  # fallback simbólico
+    
                 climate_map[pais] = clim
-                econ_df = worldbank_gdp_percap(iso2, start=datetime.utcnow().year - 10, end=datetime.utcnow().year) if iso2 else pd.DataFrame()
+    
+                # --- PIB (World Bank) ---
+                year_now = datetime.utcnow().year - 1  # último ano completo
+                econ_df = worldbank_gdp_percap(iso2, start=year_now - 10, end=year_now) if iso2 else pd.DataFrame()
+    
+                if econ_df.empty:
+                    logger.warning(f"[World Bank] Dados ausentes para {pais}. Criando linha de fallback.")
+                    econ_df = pd.DataFrame([{"year": year_now, "value": np.nan}])
+    
                 econ_map[pais] = econ_df
+    
+                # --- MÉTRICAS VISUAIS ---
                 c1, c2, c3 = st.columns(3)
-                c1.metric("Temp max média (°C)", clim.get("temp_max_avg") if clim.get("temp_max_avg") is not None else "N/D")
-                c2.metric("Precip total (mm)", clim.get("precip_total") if clim.get("precip_total") is not None else "N/D")
+                c1.metric("Temp. máx. média (°C)", f"{clim.get('temp_max_avg', 0):.1f}" if clim.get("temp_max_avg") else "N/A")
+                c2.metric("Precip. total (mm)", f"{clim.get('precip_total', 0):.1f}" if clim.get("precip_total") else "N/A")
+    
                 if not econ_df.empty and "value" in econ_df.columns:
                     recent = econ_df.dropna().sort_values("year", ascending=False).head(1)
-                    gdp_disp = f"US$ {int(recent.iloc[0]['value']):,}" if not recent.empty else "N/D"
+                    gdp_disp = f"US$ {int(recent.iloc[0]['value']):,}" if not recent.empty and pd.notna(recent.iloc[0]['value']) else "N/A"
                 else:
-                    gdp_disp = "N/D"
+                    gdp_disp = "N/A"
+    
                 c3.metric("PIB per capita (último)", gdp_disp)
+    
+                # --- AVALIAÇÃO SIMULADA ---
                 review = wine_review_proxy(pais)
-                st.caption(f"Avaliação proxy: {review['avg_score']} (n={review['reviews_count']})")
-                try:
-                    prog.progress(int((i + 1) / len(top_list) * 100))
-                except Exception:
-                    pass
-            try:
-                prog.empty()
-            except Exception:
-                pass
+                st.caption(f"Avaliação proxy: {review['avg_score']} ⭐ (n={review['reviews_count']})")
+    
+                prog.progress(int((i + 1) / len(top_list) * 100))
+    
+            prog.empty()
+            st.success("Consulta concluída com fallbacks automáticos para países sem dados disponíveis.")
+    
         else:
             st.info("Sem top países para contexto externo.")
+
 
     # ------------- Forecast -------------
     with tab_forecast:
