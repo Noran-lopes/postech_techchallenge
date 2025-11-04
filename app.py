@@ -25,7 +25,7 @@ import plotly.express as px
 # ---------------------------
 # Configurações
 # ---------------------------
-APP_TITLE = "Vitibrasil — Dashboard Executivo (V5 Final)"
+APP_TITLE = "WineData Insights"
 DEFAULT_CSV = Path("dados_uteis/dados_uteis.csv")
 LOG_LEVEL = os.getenv("APP_LOG_LEVEL", "INFO")
 logging.basicConfig(level=LOG_LEVEL, format="%(asctime)s — %(levelname)s — %(message)s")
