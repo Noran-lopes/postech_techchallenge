@@ -470,32 +470,39 @@ def main():
         econ_map = {}
         iso_map = country_iso_map(df_top["pais"].tolist()) if not df_top.empty else {}
         # progress
+        # progress
         if not df_top.empty:
-            progress = st.progress(0, key="ctx_progress")
+            progress = st.progress(0)
             for i, pais in enumerate(df_top["pais"].tolist()):
                 st.markdown(f"### {pais}")
                 iso2, iso3, latlng = iso_map.get(pais, (None, None, None))
                 lat, lon = (latlng[0], latlng[1]) if latlng else (None, None)
-                # climate window
                 end = datetime.utcnow().date()
                 start = (end - timedelta(days=30 * climate_months)).isoformat()
                 clim = open_meteo_climate(lat, lon, start, end) if lat and lon else {}
                 climate_map[pais] = clim
                 econ = worldbank_gdp_percap(iso2, start=datetime.utcnow().year - 10, end=datetime.utcnow().year) if iso2 else pd.DataFrame()
                 econ_map[pais] = econ
+        
                 c1, c2, c3 = st.columns(3)
-                c1.metric("Temp max média (°C)", clim.get("temp_max_avg") or "N/D", key=f"ctx_temp_{i}")
-                c2.metric("Precip total (mm)", clim.get("precip_total") or "N/D", key=f"ctx_precip_{i}")
-                # GDP last
+                c1.metric("Temp max média (°C)", clim.get("temp_max_avg") or "N/D")
+                c2.metric("Precip total (mm)", clim.get("precip_total") or "N/D")
                 if not econ.empty and "value" in econ.columns:
                     last = econ.dropna().sort_values("year", ascending=False).head(1)
                     gdp_val = f"US$ {int(last.iloc[0]['value']):,}" if not last.empty else "N/D"
                 else:
                     gdp_val = "N/D"
-                c3.metric("PIB per capita (último)", gdp_val, key=f"ctx_gdp_{i}")
-                st.caption(f"Avaliação média proxy: {wine_review_proxy(pais)['avg_score']} (n={wine_review_proxy(pais)['reviews_count']})", key=f"ctx_rev_{i}")
-                progress.progress(int((i+1)/len(df_top)*100) if len(df_top) else 100)
+                c3.metric("PIB per capita (último)", gdp_val)
+        
+                st.caption(f"Avaliação média proxy: {wine_review_proxy(pais)['avg_score']} "
+                           f"(n={wine_review_proxy(pais)['reviews_count']})")
+        
+                try:
+                    progress.progress(int((i + 1) / len(df_top) * 100))
+                except Exception:
+                    pass
             progress.empty()
+
         else:
             st.info("Sem top países para contexto externo.")
 
