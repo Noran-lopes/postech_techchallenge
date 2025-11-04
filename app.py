@@ -321,7 +321,7 @@ def chart_value_trend(df_year: pd.DataFrame, key: str):
                   title="Evolução anual do valor exportado (US$)")
     fig.update_layout(yaxis_title="Valor (US$)", xaxis_title="Ano", height=480)
     st.plotly_chart(fig, use_container_width=True, key=key)
-    st.markdown("🧠 **Análise:** O gráfico mostra a evolução das exportações de vinho ao longo dos anos, evidenciando a tendência geral do setor. Picos podem estar associados a safras favoráveis ou aumento da demanda internacional, enquanto quedas pontuais podem refletir variações cambiais, crises econômicas globais ou ajustes de mercado. O comportamento da curva permite identificar períodos de expansão e retração do mercado exportador brasileiro.")
+    st.markdown("🧠 **Análise:** As exportações de vinho brasileiro apresentam comportamento cíclico, com períodos de expansão seguidos por retrações acentuadas. O pico em 2013, acima de US$ 20 milhões, indica condições favoráveis ou aumento da demanda externa, enquanto as quedas após 2009 e 2014 refletem vulnerabilidade a crises globais e variações cambiais. A partir de 2016, observa-se recuperação gradual e maior estabilidade, culminando em crescimento consistente até 2022, sinalizando potencial de consolidação no mercado internacional. Essas oscilações reforçam a importância de estratégias de diversificação e mitigação de riscos para sustentar o crescimento das exportações.")
 
 def chart_top_countries_bar(df_top: pd.DataFrame, key: str):
     if df_top.empty:
@@ -331,7 +331,7 @@ def chart_top_countries_bar(df_top: pd.DataFrame, key: str):
                  title="Top países por valor exportado")
     fig.update_layout(xaxis_tickangle=-35, yaxis_title="Valor (US$)", height=420)
     st.plotly_chart(fig, use_container_width=True, key=key)
-    st.markdown("🧠 **Análise:** Este gráfico revela a concentração das exportações em determinados mercados. Países com maiores valores exportados indicam maior dependência comercial e oportunidades de fidelização. Já aqueles com participação menor podem representar mercados emergentes com potencial de crescimento. A análise de concentração ajuda a avaliar riscos e estratégias de diversificação.")
+    st.markdown("🧠 **Análise:** O gráfico evidencia forte concentração das exportações de vinho brasileiro em poucos mercados, com destaque para Portugal e Rússia, que juntos representam a maior parte do valor exportado. Essa concentração indica maior dependência comercial desses países, criando oportunidades de fidelização, mas também riscos em caso de instabilidade. Mercados com menor participação, como Japão e Haiti, podem representar potencial de crescimento e diversificação. A análise reforça a importância de estratégias para reduzir dependência e explorar novos destinos, garantindo maior equilíbrio e sustentabilidade nas exportações.")
 
 def chart_treemap_continent(df: pd.DataFrame, key: str):
     """Treemap — participação por continente (offline, sem REST Countries)."""
@@ -354,7 +354,7 @@ def chart_treemap_continent(df: pd.DataFrame, key: str):
     fig = px.treemap(agg, path=["continente"], values="valor_exportacao", title="Participação por Região/Continente")
     fig.update_layout(height=480)
     st.plotly_chart(fig, use_container_width=True, key=key)
-    st.markdown("🧠 **Análise:** A visualização destaca a relevância de cada continente na pauta exportadora. É possível perceber a predominância de determinadas regiões — como Europa e Américas — o que reflete tanto a proximidade cultural quanto acordos comerciais existentes. Mercados asiáticos e africanos, quando presentes, indicam oportunidades de expansão e novos canais de distribuição.")
+    st.markdown("🧠 **Análise:** A visualização evidencia a predominância das exportações de vinho brasileiro para a Europa e as Américas, refletindo proximidade cultural e acordos comerciais consolidados. Regiões como Ásia, África e Oceania apresentam participação reduzida, mas representam oportunidades estratégicas para expansão e diversificação de mercados. Essa concentração reforça a necessidade de explorar novos canais de distribuição e reduzir dependência de regiões tradicionais.")
 
 def chart_scatter_price_volume(df: pd.DataFrame, key: str):
     if df.empty:
@@ -375,7 +375,7 @@ def chart_scatter_price_volume(df: pd.DataFrame, key: str):
                      title="Preço por litro vs Quantidade (por registro)")
     fig.update_layout(xaxis_title="Quantidade (L)", yaxis_title="Valor por litro (US$)", height=520)
     st.plotly_chart(fig, use_container_width=True, key=key)
-    st.markdown("🧠 **Análise:** O gráfico evidencia a relação entre o preço médio e o volume exportado. Pontos concentrados indicam padrões de mercado estáveis, enquanto outliers podem sinalizar nichos premium ou operações específicas. Essa análise auxilia na compreensão do posicionamento competitivo e na avaliação da elasticidade de preço.")
+    st.markdown("🧠 **Análise:** O gráfico mostra a relação entre preço médio por litro e volume exportado, destacando padrões de mercado e possíveis outliers. A concentração de pontos próximos ao eixo indica operações com preços estáveis e volumes moderados, enquanto valores isolados sugerem nichos premium ou negociações específicas. Essa análise é útil para compreender o posicionamento competitivo e avaliar a elasticidade de preço, apoiando decisões estratégicas sobre mix de produtos e segmentação de mercados.")
 
 def chart_box_price_by_country(df: pd.DataFrame, key: str):
     if df.empty:
@@ -399,7 +399,7 @@ def chart_box_price_by_country(df: pd.DataFrame, key: str):
         fig = px.box(d_f, x="pais", y="valor_exportacao_por_litro", title="Distribuição de preço por litro (por país)")
         fig.update_layout(xaxis_tickangle=-45, height=520)
         st.plotly_chart(fig, use_container_width=True, key=key)
-        st.markdown("🧠 **Análise:** A distribuição mostra a variabilidade de preços praticados por país, permitindo identificar mercados com maior sensibilidade ao preço e outros mais dispostos a pagar valores superiores. Países com maior dispersão podem refletir uma presença de múltiplos segmentos (popular e premium).")
+        st.markdown("🧠 **Análise:** O gráfico apresenta a distribuição do preço por litro de vinho exportado para diferentes países, evidenciando alta dispersão e presença de outliers. A maioria dos mercados concentra preços em faixas baixas e estáveis, enquanto alguns países registram valores significativamente superiores, indicando nichos premium ou operações específicas. Essa análise é essencial para compreender variações de posicionamento, identificar oportunidades de precificação diferenciada e ajustar estratégias comerciais conforme a elasticidade de preço em cada mercado.")
     else:
         st.info("Coluna 'pais' ausente para boxplot por país.")
 
@@ -420,7 +420,7 @@ def chart_choropleth(df_top: pd.DataFrame, iso_map: Dict[str, Tuple[Optional[str
                         color_continuous_scale="Blues", title="Mapa: Valor Exportado por País")
     fig.update_layout(height=560)
     st.plotly_chart(fig, use_container_width=True, key=key)
-    st.markdown("🧠 **Análise:** O mapa reforça a distribuição geográfica das exportações, permitindo observar a presença do produto brasileiro em diferentes regiões do mundo. Áreas com coloração mais intensa refletem maiores volumes financeiros, enquanto países com baixa representatividade podem ser priorizados em estratégias comerciais futuras.")
+    st.markdown("🧠 **Análise:** O mapa evidencia a distribuição geográfica das exportações de vinho brasileiro, destacando maior concentração em regiões específicas, como Europa e Rússia, indicadas pela coloração mais intensa. Essa concentração reflete maiores volumes financeiros e dependência comercial desses mercados. Países com baixa representatividade podem ser priorizados em estratégias futuras, visando diversificação e redução de riscos. A análise reforça a importância de explorar novos destinos para ampliar a presença global.")
 
 
 # ---------------------------
