@@ -321,7 +321,12 @@ def chart_value_trend(df_year: pd.DataFrame, key: str):
                   title="Evolução anual do valor exportado (US$)")
     fig.update_layout(yaxis_title="Valor (US$)", xaxis_title="Ano", height=480)
     st.plotly_chart(fig, use_container_width=True, key=key)
-    st.text_area("🧠 Análise sobre o gráfico:", "(Escreva aqui sua análise sobre a evolução anual do valor exportado...)", key=f"analise_{key}")
+    analise = st.text_area(
+        "🧠 Análise sobre o gráfico:",
+        st.session_state.get(f"analise_{key}", "(Escreva aqui sua análise sobre a evolução anual do valor exportado...)"),
+        key=f"analise_{key}_input"
+    )
+    st.session_state[f"analise_{key}"] = analise
 
 def chart_top_countries_bar(df_top: pd.DataFrame, key: str):
     if df_top.empty:
@@ -606,6 +611,25 @@ def main():
         st.markdown("**Sugestão:** incorporar estes pontos em um slide executivo (3-5 bullets) para apresentação à gerência.")
 
     st.caption("V5 Final — Dashboard analítico e executivo. Limitações: forecasts exploratórios; validar antes de decisões operacionais.")
+    
+    # ------------- Salvamento das análises -------------
+    st.markdown("---")
+    st.subheader("💾 Exportar análises realizadas")
+    
+    if st.button("Salvar todas as análises em CSV"):
+        analises = {k: v for k, v in st.session_state.items() if k.startswith("analise_")}
+        if analises:
+            df_analises = pd.DataFrame(list(analises.items()), columns=["gráfico", "análise"])
+            df_analises.to_csv("analises_dashboard.csv", index=False, encoding="utf-8-sig")
+            st.success("✅ Análises salvas com sucesso em 'analises_dashboard.csv'!")
+            st.download_button(
+                "📥 Baixar arquivo de análises",
+                data=df_analises.to_csv(index=False).encode("utf-8-sig"),
+                file_name="analises_dashboard.csv",
+                mime="text/csv"
+            )
+        else:
+            st.warning("Nenhuma análise preenchida até o momento.")
 
 # ---------------------------
 # Execução
