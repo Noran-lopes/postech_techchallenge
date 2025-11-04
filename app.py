@@ -1,6 +1,6 @@
 """
 app_v5_exec_final_offline_continent.py
-Dashboard Executivo e Analítico de Exportações de Vinho
+Dashboard de Exportações de Vinho
 
 Principais ajustes:
 - Treemap offline (CONTINENT_MAP) para eliminar 'Outros' indevido.
