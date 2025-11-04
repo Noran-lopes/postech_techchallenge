@@ -375,7 +375,7 @@ def chart_scatter_price_volume(df: pd.DataFrame, key: str):
                      title="Preço por litro vs Quantidade (por registro)")
     fig.update_layout(xaxis_title="Quantidade (L)", yaxis_title="Valor por litro (US$)", height=520)
     st.plotly_chart(fig, use_container_width=True, key=key)
-    st.markdown("🧠 **Análise:** O mapa reforça a distribuição geográfica das exportações, permitindo observar a presença do produto brasileiro em diferentes regiões do mundo. Áreas com coloração mais intensa refletem maiores volumes financeiros, enquanto países com baixa representatividade podem ser priorizados em estratégias comerciais futuras.")
+    st.markdown("🧠 **Análise:** O gráfico evidencia a relação entre o preço médio e o volume exportado. Pontos concentrados indicam padrões de mercado estáveis, enquanto outliers podem sinalizar nichos premium ou operações específicas. Essa análise auxilia na compreensão do posicionamento competitivo e na avaliação da elasticidade de preço.")
 
 def chart_box_price_by_country(df: pd.DataFrame, key: str):
     if df.empty:
@@ -399,7 +399,7 @@ def chart_box_price_by_country(df: pd.DataFrame, key: str):
         fig = px.box(d_f, x="pais", y="valor_exportacao_por_litro", title="Distribuição de preço por litro (por país)")
         fig.update_layout(xaxis_tickangle=-45, height=520)
         st.plotly_chart(fig, use_container_width=True, key=key)
-        st.markdown("🧠 **Análise:** O gráfico evidencia a relação entre o preço médio e o volume exportado. Pontos concentrados indicam padrões de mercado estáveis, enquanto outliers podem sinalizar nichos premium ou operações específicas. Essa análise auxilia na compreensão do posicionamento competitivo e na avaliação da elasticidade de preço.")
+        st.markdown("🧠 **Análise:** A distribuição mostra a variabilidade de preços praticados por país, permitindo identificar mercados com maior sensibilidade ao preço e outros mais dispostos a pagar valores superiores. Países com maior dispersão podem refletir uma presença de múltiplos segmentos (popular e premium).")
     else:
         st.info("Coluna 'pais' ausente para boxplot por país.")
 
@@ -420,7 +420,7 @@ def chart_choropleth(df_top: pd.DataFrame, iso_map: Dict[str, Tuple[Optional[str
                         color_continuous_scale="Blues", title="Mapa: Valor Exportado por País")
     fig.update_layout(height=560)
     st.plotly_chart(fig, use_container_width=True, key=key)
-    st.markdown("🧠 **Análise:** A distribuição mostra a variabilidade de preços praticados por país, permitindo identificar mercados com maior sensibilidade ao preço e outros mais dispostos a pagar valores superiores. Países com maior dispersão podem refletir uma presença de múltiplos segmentos (popular e premium).")
+    st.markdown("🧠 **Análise:** O mapa reforça a distribuição geográfica das exportações, permitindo observar a presença do produto brasileiro em diferentes regiões do mundo. Áreas com coloração mais intensa refletem maiores volumes financeiros, enquanto países com baixa representatividade podem ser priorizados em estratégias comerciais futuras.")
 
 
 # ---------------------------
@@ -533,6 +533,7 @@ def main():
     with tab_external:
         st.subheader("Contexto Externo — Clima e Economia")
         st.markdown("Enriquecimento por país: **Open-Meteo** (clima) e **World Bank** (PIB per capita). Caso as APIs falhem, valores médios aproximados serão exibidos.")
+        st.markdown("🧠 **Análise:** Esses indicadores complementares ajudam a contextualizar as exportações sob fatores ambientais e econômicos. Países com PIB per capita elevado tendem a consumir vinhos de maior valor agregado, enquanto condições climáticas adversas podem influenciar sazonalmente a logística e o consumo local.")
     
         # Dicionário de correção de nomes de países
         COUNTRY_FIX = {
@@ -657,11 +658,13 @@ def main():
                 fig.add_vline(x=int(df_year["ano"].max()), line_dash="dash", line_color="gray")
                 st.plotly_chart(fig, use_container_width=True, key="chart_forecast_main")
                 st.markdown("**Nota acadêmica:** validação temporal e modelos robustos (Prophet, ARIMA) recomendados para decisões operacionais.")
+                st.markdown("**🧠 Análise:** A projeção linear fornece uma estimativa simples de tendência futura com base no histórico recente. O aumento projetado indica possível continuidade do crescimento, enquanto estabilizações sugerem maturidade do mercado. É importante interpretar os resultados com cautela, pois modelos lineares não consideram variações econômicas, cambiais ou sazonais complexas.")
 
     # ------------- Raw data -------------
     with tab_raw:
         st.subheader("Dados brutos (filtrados)")
         st.dataframe(df.reset_index(drop=True), use_container_width=True, key="raw_data_table")
+        st.markdown("**🧠 Análise:** A tabela consolida os dados de base utilizados nas visualizações, permitindo auditoria e conferência dos cálculos. É útil para identificar anomalias ou validar insights obtidos nos gráficos anteriores.")
         st.download_button("Baixar CSV filtrado", df.to_csv(index=False).encode("utf-8"),
                            "exportacoes_filtradas.csv", "text/csv", key="download_filtered_csv")
 
