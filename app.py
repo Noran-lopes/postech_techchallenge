@@ -321,6 +321,7 @@ def chart_value_trend(df_year: pd.DataFrame, key: str):
                   title="Evolução anual do valor exportado (US$)")
     fig.update_layout(yaxis_title="Valor (US$)", xaxis_title="Ano", height=480)
     st.plotly_chart(fig, use_container_width=True, key=key)
+    st.text_area("🧠 Análise sobre o gráfico:", "(Escreva aqui sua análise sobre a evolução anual do valor exportado...)", key=f"analise_{key}")
 
 def chart_top_countries_bar(df_top: pd.DataFrame, key: str):
     if df_top.empty:
@@ -330,6 +331,7 @@ def chart_top_countries_bar(df_top: pd.DataFrame, key: str):
                  title="Top países por valor exportado")
     fig.update_layout(xaxis_tickangle=-35, yaxis_title="Valor (US$)", height=420)
     st.plotly_chart(fig, use_container_width=True, key=key)
+    st.text_area("🧠 Análise sobre o gráfico:", "(Adicione sua análise sobre os países com maior valor exportado...)", key=f"analise_{key}")
 
 def chart_treemap_continent(df: pd.DataFrame, key: str):
     """Treemap — participação por continente (offline, sem REST Countries)."""
@@ -352,6 +354,7 @@ def chart_treemap_continent(df: pd.DataFrame, key: str):
     fig = px.treemap(agg, path=["continente"], values="valor_exportacao", title="Participação por Região/Continente")
     fig.update_layout(height=480)
     st.plotly_chart(fig, use_container_width=True, key=key)
+    st.text_area("🧠 Análise sobre o gráfico:", "(Escreva aqui uma análise sobre a distribuição das exportações por continente...)", key=f"analise_{key}")
 
 def chart_scatter_price_volume(df: pd.DataFrame, key: str):
     if df.empty:
@@ -372,6 +375,7 @@ def chart_scatter_price_volume(df: pd.DataFrame, key: str):
                      title="Preço por litro vs Quantidade (por registro)")
     fig.update_layout(xaxis_title="Quantidade (L)", yaxis_title="Valor por litro (US$)", height=520)
     st.plotly_chart(fig, use_container_width=True, key=key)
+    st.text_area("🧠 Análise sobre o gráfico:", "(Descreva aqui o comportamento entre preço e quantidade exportada...)", key=f"analise_{key}")
 
 def chart_box_price_by_country(df: pd.DataFrame, key: str):
     if df.empty:
@@ -395,6 +399,7 @@ def chart_box_price_by_country(df: pd.DataFrame, key: str):
         fig = px.box(d_f, x="pais", y="valor_exportacao_por_litro", title="Distribuição de preço por litro (por país)")
         fig.update_layout(xaxis_tickangle=-45, height=520)
         st.plotly_chart(fig, use_container_width=True, key=key)
+        st.text_area("🧠 Análise sobre o gráfico:", "(Insira aqui observações sobre dispersão e outliers por país...)", key=f"analise_{key}")
     else:
         st.info("Coluna 'pais' ausente para boxplot por país.")
 
@@ -415,6 +420,7 @@ def chart_choropleth(df_top: pd.DataFrame, iso_map: Dict[str, Tuple[Optional[str
                         color_continuous_scale="Blues", title="Mapa: Valor Exportado por País")
     fig.update_layout(height=560)
     st.plotly_chart(fig, use_container_width=True, key=key)
+    st.text_area("🧠 Análise sobre o gráfico:", "(Contextualize visualmente os principais destinos das exportações...)", key=f"analise_{key}")
 
 # ---------------------------
 # Insights automáticos (heurísticos)
