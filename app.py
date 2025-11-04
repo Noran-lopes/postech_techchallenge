@@ -198,6 +198,117 @@ def simple_linear_forecast(df_year: pd.DataFrame, n_future: int = 5) -> pd.DataF
 # ---------------------------
 # Main App
 # ---------------------------
+
+def normalize_region(info: Optional[dict]) -> str:
+    """Normaliza o atributo de região/continente retornado pelo REST Countries para um dos 5 continentes.
+    Estratégia:
+    1. Usar campo 'continents' se disponível (REST Countries v3).
+    2. Caso contrário, usar 'region' se estiver entre os continentes conhecidos.
+    3. Se houver 'subregion' contendo 'America', mapear para 'Americas'.
+    4. Caso contrário, retornar 'Outros'.
+    """
+    continents_allowed = {"Africa", "Americas", "Asia", "Europe", "Oceania"}
+    if not info or not isinstance(info, dict):
+        return "Outros"
+    # Try continents field
+    conts = safe_get(info, "continents", None)
+    if isinstance(conts, list) and conts:
+        for c in conts:
+            if c in continents_allowed:
+                return c
+    # Try region
+    region = safe_get(info, "region", None)
+    if isinstance(region, str) and region in continents_allowed:
+        return region
+    # Try subregion heuristics
+    sub = safe_get(info, "subregion", "") or ""
+    if isinstance(sub, str) and "America" in sub:
+        return "Americas"
+    # Last resort: check latlng hemisphere (simple heuristic)
+    latlng = safe_get(info, "latlng", None)
+    if isinstance(latlng, list) and len(latlng) >= 1:
+        lat = latlng[0]
+        if lat < -60 or lat > 60:
+            return "Oceania" if lat > 0 else "Americas"
+    return "Outros"
+
+
+def build_iso_map_enriched(countries: List[str]) -> Dict[str, Dict[str, Optional[object]]]:
+    """
+    Mapeia países para dict com campos: iso2, iso3, latlng, region_normalized, raw_info
+    Retorna: {pais: {"iso2":..., "iso3":..., "latlng":..., "region":..., "info": ...}}
+    """
+    mapping: Dict[str, Dict[str, Optional[object]]] = {}
+    for c in countries:
+        info = restcountries_search(c)
+        iso2 = safe_get(info, "cca2", None) if info else None
+        iso3 = safe_get(info, "cca3", None) if info else None
+        latlng = safe_get(info, "latlng", None) or safe_get(info, "capitalInfo", {}).get("latlng") if info else None
+        region_norm = normalize_region(info)
+        mapping[c] = {
+            "iso2": iso2.upper() if iso2 else None,
+            "iso3": iso3 if iso3 else None,
+            "latlng": latlng if latlng else None,
+            "region": region_norm,
+            "info": info
+        }
+    return mapping
+
+
+def chart_treemap_continent_improved(df: pd.DataFrame, key: str):
+    """Treemap com normalização de continentes — evita categorias 'Outros' quando possível."""
+    if "pais" not in df.columns:
+        st.info("Coluna 'pais' inexistente no dataset.")
+        return
+    rows = []
+    # coletar informações REST apenas uma vez por país
+    unique_countries = df["pais"].unique().tolist()
+    iso_enriched = build_iso_map_enriched(unique_countries)
+    for p in unique_countries:
+        region = iso_enriched.get(p, {}).get("region", "Outros")
+        rows.append({"pais": p, "region": region})
+    reg_df = pd.DataFrame(rows)
+    merged = df.merge(reg_df, on="pais", how="left")
+    # Agregar por região normalizada
+    agg = merged.groupby("region", as_index=False).agg({"valor_exportacao": "sum"})
+    if agg.empty:
+        st.info("Não foi possível montar treemap (dados insuficientes).")
+        return
+    # remover 'Outros' se sua participação for insignificante (<0.5%) ou zero
+    total = agg["valor_exportacao"].sum()
+    if total > 0 and "Outros" in agg["region"].values:
+        outros_val = float(agg.loc[agg["region"] == "Outros", "valor_exportacao"].sum())
+        if outros_val == 0 or (outros_val / total) < 0.005:
+            agg = agg[agg["region"] != "Outros"]
+    fig = px.treemap(agg, path=["region"], values="valor_exportacao", title="Participação por Região/Continente")
+    fig.update_layout(height=480)
+    st.plotly_chart(fig, use_container_width=True, key=key)
+
+
+# Atualizar chart_choropleth para usar estrutura enriquecida
+def chart_choropleth_improved(df_top: pd.DataFrame, iso_map_enriched: Dict[str, Dict[str, Optional[object]]], key: str):
+    if df_top.empty:
+        st.info("Sem dados para mapa.")
+        return
+    rows = []
+    for _, r in df_top.iterrows():
+        pais = r["pais"]
+        iso3 = iso_map_enriched.get(pais, {}).get("iso3")
+        rows.append({"pais": pais, "valor_exportacao": r["valor_exportacao"], "iso3": iso3})
+    mdf = pd.DataFrame(rows)
+    if mdf["iso3"].isnull().all():
+        st.info("Não foi possível mapear códigos ISO3 para os países.")
+        return
+    fig = px.choropleth(mdf, locations="iso3", color="valor_exportacao", hover_name="pais",
+                        color_continuous_scale="Blues", title="Mapa: Valor Exportado por País")
+    fig.update_layout(height=560)
+    st.plotly_chart(fig, use_container_width=True, key=key)
+
+
+# ---------------------------
+# Main App atualizado
+# ---------------------------
+
 def main():
     st.set_page_config(page_title=APP_TITLE, layout="wide")
     st.title(APP_TITLE)
@@ -216,58 +327,127 @@ def main():
 
     df = filter_last_n_years(df, int(years))
     if df.empty:
-        st.warning("Dataset vazio após filtro de anos.")
+        st.warning("Dataset vazio após filtro de anos. Verifique o CSV e o filtro.")
         return
 
     total_val = float(df["valor_exportacao"].sum()) if "valor_exportacao" in df.columns else 0.0
     total_vol = float(df["quantidade_exportacao"].sum()) if "quantidade_exportacao" in df.columns else 0.0
     avg_price = (total_val / total_vol) if total_vol else 0.0
-    col1, col2, col3, col4 = st.columns(4)
+    col1, col2, col3, col4 = st.columns([1.2, 1.2, 1.2, 1.2])
     col1.metric("Valor total (US$)", human(total_val))
     col2.metric("Volume total (L)", human(total_vol))
     col3.metric("Preço médio (US$/L)", human(avg_price))
 
-    df_top_all = top_countries(df, top_n)
-    if not df_top_all.empty:
-        pct_top1 = df_top_all.iloc[0]["valor_exportacao"] / total_val * 100 if total_val else 0
+    df_top = top_countries(df, top_n)
+    if not df_top.empty:
+        pct_top1 = df_top.iloc[0]["valor_exportacao"] / total_val * 100 if total_val else 0
         col4.metric("Concentração top1 (%)", f"{pct_top1:.1f}%")
     else:
         col4.metric("Concentração top1 (%)", "N/D")
 
-    tab_overview, tab_external = st.tabs(["Overview", "Contexto Externo"])
+    tab_overview, tab_detailed, tab_external, tab_forecast, tab_raw, tab_insights = st.tabs(
+        ["Overview", "Detalhado", "Contexto Externo", "Forecast", "Dados Brutos", "Insights"]
+    )
 
+    # Overview
     with tab_overview:
-        df_year = agg_by_year(df)
         st.subheader("Resumo Executivo")
-        if df_year.empty:
-            st.info("Sem dados suficientes.")
+        df_year = agg_by_year(df)
+        chart_value_trend(df_year, key="chart_value_trend_overview")
+        chart_top_countries_bar(df_top, key="chart_top_countries_overview")
+        chart_treemap_continent_improved(df, key="chart_treemap_overview")
+        if show_map and not df_top.empty:
+            iso_map_enriched = build_iso_map_enriched(df_top["pais"].tolist())
+            chart_choropleth_improved(df_top, iso_map_enriched, key="chart_choropleth_overview")
 
+    # Detailed
+    with tab_detailed:
+        st.subheader("Análise Detalhada — preço, volume e dispersão")
+        chart_scatter_price_volume(df, key="chart_scatter_price_volume")
+        chart_box_price_by_country(df, key="chart_box_price_country")
+        st.markdown("Tabela — Top países (valor e quantidade)")
+        if not df_top.empty:
+            st.dataframe(df_top.reset_index(drop=True), use_container_width=True, key="df_top_table")
+        else:
+            st.info("Sem top países para exibir tabela.")
+
+    # External context (melhorias: uso de latlng capitalInfo fallback e iso_map_enriched)
     with tab_external:
         st.subheader("Contexto Externo — clima e economia")
-        if not df_top_all.empty:
-            prog = st.progress(0)  # <-- corrigido: sem key
-            iso_map = build_iso_map(df_top_all["pais"].tolist())
-            for i, pais in enumerate(df_top_all["pais"].tolist()):
+        st.markdown("Enriquecimento por país: Open-Meteo (clima) e World Bank (PIB per capita). Foram adicionados fallbacks para lat/lon e normalização de continentes.")
+        climate_map: Dict[str, dict] = {}
+        econ_map: Dict[str, pd.DataFrame] = {}
+        if not df_top.empty:
+            iso_map_enriched = build_iso_map_enriched(df_top["pais"].tolist())
+            prog = st.progress(0)
+            top_list = df_top["pais"].tolist()
+            for i, pais in enumerate(top_list):
                 st.markdown(f"### {pais}")
-                iso2, iso3, latlng = iso_map.get(pais, (None, None, None))
-                lat, lon = (latlng[0], latlng[1]) if latlng else (None, None)
-                end_date = datetime.utcnow().date()
-                start_date = (end_date - timedelta(days=30 * int(climate_months))).isoformat()
-                clim = open_meteo_climate(lat, lon, start_date, end_date) if lat and lon else {}
+                meta = iso_map_enriched.get(pais, {})
+                iso2 = meta.get("iso2")
+                latlng = meta.get("latlng")
+                lat = lon = None
+                if isinstance(latlng, list) and len(latlng) >= 2:
+                    lat, lon = latlng[0], latlng[1]
+                # chamar Open-Meteo apenas se tivemos coordenadas plausíveis
+                clim = open_meteo_climate(lat, lon, (datetime.utcnow().date() - timedelta(days=30 * int(climate_months))).isoformat(), datetime.utcnow().date().isoformat()) if lat is not None and lon is not None else {}
+                climate_map[pais] = clim or {}
                 econ_df = worldbank_gdp_percap(iso2, start=datetime.utcnow().year - 10, end=datetime.utcnow().year) if iso2 else pd.DataFrame()
+                econ_map[pais] = econ_df
+                review = wine_review_proxy(pais)
                 c1, c2, c3 = st.columns(3)
-                c1.metric("Temp max média (°C)", clim.get("temp_max_avg") or "N/D")
-                c2.metric("Precip total (mm)", clim.get("precip_total") or "N/D")
+                c1.metric("Temp max média (°C)", clim.get("temp_max_avg") if clim.get("temp_max_avg") is not None else "N/D")
+                c2.metric("Precip total (mm)", clim.get("precip_total") if clim.get("precip_total") is not None else "N/D")
                 if not econ_df.empty and "value" in econ_df.columns:
                     recent = econ_df.dropna().sort_values("year", ascending=False).head(1)
                     gdp_disp = f"US$ {int(recent.iloc[0]['value']):,}" if not recent.empty else "N/D"
                 else:
                     gdp_disp = "N/D"
                 c3.metric("PIB per capita (último)", gdp_disp)
-                prog.progress(int((i + 1) / len(df_top_all) * 100))
-            prog.empty()
+                st.caption(f"Avaliação proxy: {review['avg_score']} (n={review['reviews_count']})")
+                try:
+                    prog.progress(int((i + 1) / len(top_list) * 100))
+                except Exception:
+                    pass
+            try:
+                prog.empty()
+            except Exception:
+                pass
         else:
             st.info("Sem top países para contexto externo.")
+
+    # Forecast
+    with tab_forecast:
+        st.subheader("Forecast Linear (Exploratório)")
+        if df_year.empty or len(df_year) < 2:
+            st.info("Dados insuficientes para forecast.")
+        else:
+            n_future = st.number_input("Anos a prever (linear)", min_value=1, max_value=10, value=5, key="input_n_future")
+            df_pred = simple_linear_forecast(df_year, n_future=int(n_future))
+            if df_pred.empty:
+                st.info("Não foi possível gerar previsão.")
+            else:
+                combined = pd.concat([df_year, df_pred], ignore_index=True)
+                fig = px.line(combined, x="ano", y="valor_exportacao", markers=True, title="Histórico + Forecast (Linear)")
+                fig.add_vline(x=int(df_year["ano"].max()), line_dash="dash", line_color="gray")
+                st.plotly_chart(fig, use_container_width=True, key="chart_forecast_main")
+                st.markdown("**Nota acadêmica:** validar modelos mais robustos antes de usar em produção.")
+
+    # Raw
+    with tab_raw:
+        st.subheader("Dados brutos (filtrados)")
+        st.dataframe(df.reset_index(drop=True), use_container_width=True, key="raw_data_table")
+        st.download_button("Baixar CSV filtrado", df.to_csv(index=False).encode("utf-8"), "exportacoes_filtradas.csv", "text/csv", key="download_filtered_csv")
+
+    # Insights
+    with tab_insights:
+        st.subheader("Insights Automáticos — Resumo Executivo")
+        insights = generate_insights(df, df_top, climate_map if 'climate_map' in locals() else {}, econ_map if 'econ_map' in locals() else {})
+        for idx, it in enumerate(insights, 1):
+            st.write(f"{idx}. {it}")
+
+    st.caption("V5 — Dashboard melhorado: normalização de continentes e fallbacks no contexto externo.")
+
 
 if __name__ == "__main__":
     main()
